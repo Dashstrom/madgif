@@ -1,0 +1,11 @@
+cryptography==3.3
+Flask  
+datetime 
+uuid
+Flask-SQLAlchemy
+PyJWT
+types-Flask
+sqlalchemy-stubs
+Flask-RESTful
+Flask-Testing
+Flask-Login
