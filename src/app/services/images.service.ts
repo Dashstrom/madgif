@@ -8,27 +8,27 @@ export class ImagesService {
 
   constructor(private http: HttpClient) {}
 
-  uploadImage() {
+  uploadImage(): void {
 
   }
 
-  getImages() {
+  getImages(): void {
 
   }
 
-  getImageById(iid) {
+  getImageById(iid: string): void {
 
   }
 
-  getRawImageById(iid) {
+  getRawImageById(iid: string): void {
 
   }
 
-  update_image(iid) {
+  update_image(iid: string): void {
 
   }
 
-  deleteImageById(iid) {
+  deleteImageById(iid: string): void {
 
   }
 }

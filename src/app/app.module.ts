@@ -15,8 +15,12 @@ registerLocaleData(localeFr);
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeLandingInfoComponent } from './home-landing-info/home-landing-info.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { GalleryService } from './services/gallery.service';
+import { AuthService } from './services/auth.service';
+import { ImagesService } from './services/images.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,12 +35,17 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: "fr-FR" },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    DatePipe
+    DatePipe,
+    GalleryService,
+    AuthService,
+    ImagesService
   ],
   bootstrap: [AppComponent]
 })
