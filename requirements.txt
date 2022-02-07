@@ -1,4 +1,4 @@
-cryptography
+cryptography==3.2
 Flask~=2.0.2
 datetime~=4.3
 uuid~=1.30
