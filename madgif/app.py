@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask
-from flask_migrate import Migrate
 
 from .config import Config
 from .api import auth, images
@@ -20,7 +19,6 @@ def create_app(app_name=None):
     app.register_blueprint(images)
     db.init_app(app)
     bcrypt.init_app(app)
-    Migrate(app, db)
 
     app.before_first_request(db.create_all)
     return app

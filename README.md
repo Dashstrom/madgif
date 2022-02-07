@@ -12,7 +12,6 @@ cd madgif
 - `flask db init`: init database
 - `flask db migrate`: Create migration
 - `flask db upgrade`: Apply migration
-- `flask run`: Run the api
 - `npm rebuild node-sass`: In case of `Node Sass does not yet support your current environment`
 - `export NODE_OPTIONS=--openssl-legacy-provider`: In case of `Error: error:0308010C:digital envelope routines::unsupported`
 - `ng serve`: Run the frontend

@@ -2,8 +2,8 @@ from functools import wraps
 import jwt
 from PIL import Image
 from flask import send_file, request, jsonify, make_response
-from madgif.utils import img2io
 
+from .utils import img2io
 from .models import User
 from .config import Config
 
