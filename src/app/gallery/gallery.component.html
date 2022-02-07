@@ -1,0 +1,27 @@
+<div class="gallery-info mx-4 mt-5 pb-4">
+  <h2>
+    Galerie
+    <!--<button>
+      <img class="icon" src="" alt="upload"/>
+    </button>-->
+  </h2>
+</div>
+<div class="container gallery pb-3" *ngIf="photos">
+  <div
+    class="row justify-content-around align-items-center"
+  >
+    <div
+      class="col-lg-3 col-md-6 col-sm-9 my-3 mx-1 px-0 container4photo"
+      *ngFor="let photo of photos"
+    >
+      <a [href]="photo.imgURL" target="_blank"><img [src]="photo.imgURL" alt="image amusante" /></a>
+      <div class="hide bg-black-transparent">
+        <div class="hide bottom-left-txt"><a href="#" target="_blank"><img class="icon" src="../../assets/img/send.png"></a></div>
+        <div class="hide bottom-left-txt2"><a href="#" target="_blank"><img class="icon" src="../../assets/img/pencil.png"></a></div>
+        <div class="hide bottom-left-txt3"><a href="#" target="_blank"><img class="icon" src="../../assets/img/garbage.png"></a></div>
+        <div class="hide bottom-right-txt">{{ photo.uploadDate | date:'d MMMM yyyy' }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-mad-footer></app-mad-footer>

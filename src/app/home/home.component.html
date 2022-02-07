@@ -1,3 +1,72 @@
-<p>
-  home works!
-</p>
+<app-home-carousel></app-home-carousel>
+
+<div class="edition-info mx-4 mt-5">
+    <h2>
+        Edition
+        <button class="display-info-btn" data-toggle="collapse" (click)="collapseBlock(0)"
+                [attr.aria-expanded]="!isCollapsed[0]" aria-controls="editionInfoText">
+            <img class="icon" [src]="arrowImg[0]" alt="show section"/>
+        </button>
+    </h2>
+    <div class="collapse mx-4 my-5" id="editionInfoText" [ngbCollapse]="isCollapsed[0]">
+        <div class="row edition-info justify-content-center text-center align-items-center">
+            <div class="col-12 col-lg-6 edition-info-text">
+                <p>
+                    MadGif est avant tout un outil d'édition, en ligne, mis à la disposition de tous gratuitement. 
+                    Il a été pensé pour vous permettre d'effectuer des modifications basiques sur vos images et 
+                    photos personnelles.
+                </p>
+                <p>
+                    L'outil d'édition en ligne vous donne la possibilité de créer sans limites.
+                    Vous avez la possibilité de redimensionner, faire pivoter, recadrer vos photos et de modifier 
+                    leurs couleurs. 
+                </p>
+                <div class="landing-case my-4">
+                    <a href="#" class="landing-btn py-1 px-3 h2">EDITION</a>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 edition-info-img">
+                <img 
+                class="section-illustration"
+                src="https://cdn.pixabay.com/photo/2017/07/31/11/44/laptop-2557571_1280.jpg"
+                alt="image edition"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="gallery-info mx-4 mt-5 pb-4">
+    <h2>
+        Galerie
+        <button class="display-info-btn" data-toggle="collapse" (click)="collapseBlock(1)"
+                [attr.aria-expanded]="!isCollapsed[1]" aria-controls="galerieInfoText">
+            <img class="icon" [src]="arrowImg[1]" alt="show section"/>
+        </button>
+    </h2>
+    <div class="collapse mx-4 my-5" id="galerieInfoText" [ngbCollapse]="isCollapsed[1]">
+        <div class="row edition-info justify-content-center text-center align-items-center">
+            <div class="col-12 col-lg-6 edition-info-img">
+                <img 
+                class="section-illustration"
+                src="https://cdn.pixabay.com/photo/2017/11/12/22/50/human-2944064_1280.jpg"
+                alt="image edition"/>
+            </div>
+            <div class="col-12 col-lg-6 mt-5 mt-lg-1 edition-info-text">
+                <p>
+                    Votre galerie est un espace de stockage sécurisé pour vos photos. Il est nécessaire de posséder
+                    un compte MadGif pour y accéder.
+                </p>
+                <p>
+                    Bien entendu, vous n'êtes pas obligé d'utiliser l'outil d'édition pour stocker vos photos dans la galerie. 
+                    Sachez cependant que n'importe quelle photo présente dans votre galerie peut être modifiée grâce à notre outil
+                    d'édition.
+                </p>
+                <div class="landing-case mt-4">
+                    <a href="gallery" class="landing-btn py-1 px-3 h2">GALERIE</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<app-mad-footer></app-mad-footer>

@@ -1,0 +1,51 @@
+footer {
+    .teaser-social-network {
+        color: white;
+    }
+
+    .social-networks {
+        background-color: #263238;
+    }
+    
+    .copyrights {
+        background-color: #1E282D;
+        color: white;
+    }
+
+    .icon {
+        width: 30px;
+        transition: all 0.3s ease-in-out 0s;
+    }
+
+    .icon:hover {
+        transform: rotate(360deg);
+        filter: brightness(80%);
+    }
+
+    strong {
+        font-weight: bold;
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+    }
+
+    a:hover {
+        color: rebeccapurple;
+    }
+
+    li {
+        list-style-type: none;
+    }
+
+    .lower-footer a {
+        text-decoration: underline;
+        font-size: 10px;
+        color: gray;
+    }
+
+    .lower-footer a:hover {
+        color: rebeccapurple;
+    }
+}
