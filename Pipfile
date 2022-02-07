@@ -1,0 +1,30 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+cryptography = "*"
+uuid = "~=1.30"
+sqlalchemy-stubs = "*"
+mysqlclient = "*"
+importlib-resources = "*"
+pipenv = "*"
+Flask = "~=2.0.2"
+DateTime = "~=4.3"
+Flask-SQLAlchemy = "*"
+PyJWT = "~=2.3.0"
+types-Flask = "*"
+Flask-RESTful = "*"
+Flask-Testing = "*"
+Flask-Login = "*"
+Pillow = "*"
+Werkzeug = "~=2.0.2"
+SQLAlchemy = "~=1.4.31"
+Flask-Bcrypt = "*"
+Flask-Migrate = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"

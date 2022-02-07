@@ -3,7 +3,7 @@
 import os
 
 
-class Config(object):
+class Config:
 
     PROJECT = "madgif"
     PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
@@ -18,4 +18,4 @@ class Config(object):
 
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    SQLALCHEMY_DATABASE_URI = 'mysql://madgif:madgif@localhost/db?charset=utf8'
+    SQLALCHEMY_DATABASE_URI = 'mysql://madgif:madgif@localhost/madgif?charset=utf8'

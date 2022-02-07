@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask
+from flask_migrate import Migrate
 
 from .config import Config
-from .api import auth
+from .api import auth, images
+from .extensions import db, bcrypt
 
 
 def create_app(app_name=None):
@@ -13,11 +15,12 @@ def create_app(app_name=None):
         app_name = Config.PROJECT
 
     app = Flask(app_name)
-    app.config.update({
-        'SECRET_KEY': Config.SECRET_KEY,
-        'SQLALCHEMY_DATABASE_URI': Config.SQLALCHEMY_DATABASE_URI,
-        'SQLALCHEMY_TRACK_MODIFICATIONS': Config.SQLALCHEMY_TRACK_MODIFICATIONS,
-        'APPLICATION_ROOT': Config.APPLICATION_ROOT
-    })
+    app.config.from_object(Config)
     app.register_blueprint(auth)
+    app.register_blueprint(images)
+    db.init_app(app)
+    bcrypt.init_app(app)
+    Migrate(app, db)
+
+    app.before_first_request(db.create_all)
     return app

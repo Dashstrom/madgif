@@ -9,12 +9,19 @@ cd madgif
 ## Commands
 - `export FLASK_ENV=development`: Set debug mod
 - `flask run`: Run the api
+- `flask db init`: init database
+- `flask db migrate`: Create migration
+- `flask db upgrade`: Apply migration
+- `flask run`: Run the api
+- `npm rebuild node-sass`: In case of `Node Sass does not yet support your current environment`
+- `export NODE_OPTIONS=--openssl-legacy-provider`: In case of `Error: error:0308010C:digital envelope routines::unsupported`
 - `ng serve`: Run the frontend
 
 ## Install MySQL
 ```sh
 sudo apt update
-sudo apt install mysql-server php*-mysql
+sudo apt install mysql-server libmysqlclient-dev
+# sudo apt install mysql-server libmariadbclient-dev
 
 mysql --version
 sudo /etc/init.d/mysql restart
@@ -31,6 +38,8 @@ mysql -u madgif -pmadgif -h localhost -P 3306 -D madgif
 
 SELECT USER();
 \q
+
+mysql -u madgif -pmadgif -h localhost -P 3306 -D madgif < madgif/static/schema.sql
 
 make install
 ```
