@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Observable} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { API } from '../constants';
+import { Photo } from '../model/gallery.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,20 @@ export class ImagesService {
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
-  uploadImage(): void {
-
+  uploadImage(image: File): void {
+    const formData = new FormData();
+    formData.append("file", image, image.name);
+    this.http.post(API + 'images', formData).subscribe(
+      res => { console.log(res); },
+      err => { console.error(err); }
+    )
   }
 
-  getImages(): void {
-
+  getImages(): any {
+    return this.http.get(API + 'images').subscribe(
+      res => { console.log(res); },
+      err => { console.error(err); }
+    )
   }
 
   getImageById(iid: string): void {

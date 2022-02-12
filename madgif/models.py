@@ -38,7 +38,7 @@ class Image(db.Model):
     author_id = Column(Integer, ForeignKey("user.id"), nullable=False)
     author = relationship("User", foreign_keys=[author_id])
     name = Column(String(1024), nullable=False)
-    raw = Column(LargeBinary(length=(1 < 32) - 1), nullable=False)
+    raw = Column(LargeBinary(length=(1 << 32) - 1), nullable=False)
     date_creation = Column(TIMESTAMP, nullable=False, server_default=func.now())
     date_update = Column(TIMESTAMP, nullable=False, server_default=func.now(), onupdate=func.now())
     query: BaseQuery

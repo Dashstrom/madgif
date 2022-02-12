@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask
+from flask_cors import CORS
 
 from .config import Config
 from .api import auth, images
@@ -15,6 +16,7 @@ def create_app(app_name=None):
 
     app = Flask(app_name)
     app.config.from_object(Config)
+    CORS(app)
     app.register_blueprint(auth)
     app.register_blueprint(images)
     db.init_app(app)

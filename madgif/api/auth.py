@@ -3,6 +3,7 @@ import datetime
 
 from flask import Blueprint, request, jsonify, make_response
 from flask_restful import Api
+from flask_cors import cross_origin
 import jwt
 
 from ..extensions import db, bcrypt
@@ -15,6 +16,7 @@ auth_wrap = Api(auth)
 
 
 @auth.route('/register', methods=['POST'])
+@cross_origin()
 def signup_user():
     data = request.get_json()
     username_taken = User.query.filter_by(username=data['username']).first()
@@ -32,6 +34,7 @@ def signup_user():
 
 
 @auth.route('/login', methods=['POST'])
+@cross_origin()
 def login_user():
     data = request.get_json()
     username = data.get("username")
