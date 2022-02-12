@@ -33,8 +33,8 @@
       Uploader une image ou la prendre depuis la galerie
       <a routerLink="/gallery">Galerie</a>
     </div>
-    <div *ngIf="iid">
-      <img [attr.src]="src">
+    <div *ngIf="src">
+      <img [src]="src"/>
     </div>
   </div>
 </div>

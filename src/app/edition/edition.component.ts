@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ImagesService } from '../services/images.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class EditionComponent implements OnInit {
 
   state = 0;
   iid: string|null;
-  src: SafeUrl;
+  src: SafeUrl | undefined;
 
   image: File;
 
@@ -28,15 +28,21 @@ export class EditionComponent implements OnInit {
     return this.state == state;
   }
 
-  constructor(private route: ActivatedRoute, public images: ImagesService) { }
+  constructor(
+    private route: ActivatedRoute,
+    public images: ImagesService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     let id = this.route.snapshot.params["id"];
-    this.iid = id ? id: null;
-    this.src = this.images.urlRawImageById(this.iid).subscribe(
-      url => this.src = url,
-      err => console.error(err)
-    );
+    if (id) {
+      this.iid = id;
+      this.images.urlRawImageById(this.iid).subscribe(
+        url => this.src = url,
+        err => console.log(err)
+      );
+    }
   }
 
   canvas(e) {

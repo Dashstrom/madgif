@@ -5,6 +5,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { ImageCreditComponent } from './image-credit/image-credit.component';
 import { EditionComponent } from './edition/edition.component';
 import { AuthComponent } from './auth/auth.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
   },
   {
     path: "gallery",
+    canActivate: [AuthGuard],
     pathMatch: "full",
     component: GalleryComponent,
   },
@@ -29,11 +31,13 @@ const routes: Routes = [
   },
   {
     path: "edition",
+    canActivate: [AuthGuard],
     pathMatch: "full",
     component: EditionComponent,
   },
   {
     path: "edition/:id",
+    canActivate: [AuthGuard],
     pathMatch: "full",
     component: EditionComponent,
   }

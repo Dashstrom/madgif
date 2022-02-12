@@ -14,11 +14,11 @@ export class GalleryComponent implements OnInit {
   constructor(private imagesService: ImagesService) {}
 
   ngOnInit() {
-    this.photos = this.imagesService.photos;
+    this.photos = []; // this.imagesService.photos;
   }
 
   onChange(event) {
-    this.file2upload = event.target.files[0]; 
+    this.file2upload = event.target.files[0];
   }
 
   onUpload() {

@@ -38,12 +38,21 @@ export class ImagesService {
   }
 
   urlRawImageById(iid: string): Observable<SafeUrl> {
-    return this.http.get<Blob>(`${API}images/${iid}/raw`).pipe(
-      map(raw => {
-        console.log(raw);
-        return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(<any>raw))
-      })
-    );
+    return new Observable(o => {
+      console.log("Request " + iid);
+      if (iid == null) {
+        o.error({status: 400, msg: "Missing public_id"});
+        return;
+      }
+      this.http.get(`${API}images/${iid}/raw`, {responseType: 'blob'}).subscribe(
+        res => {
+          const url = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(<any>res));
+          o.next(url);
+        },
+        err => o.error(err),
+        () => o.complete()
+      );
+    });
   }
 
   updateImage(iid: string): void {
