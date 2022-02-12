@@ -80,4 +80,5 @@ def update_image(user, iid):
 @jwt_required
 def delete_image_by_id(user, iid):
     Image.img(user.id, iid).delete()
+    db.session.commit()
     return jsonify({"msg": "Deleted"}), 200
