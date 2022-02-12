@@ -1,5 +1,5 @@
 export class Photo {
-    id!: number;
+    id!: string;
     imgURL!: string;
     uploadDate!: Date;
 }

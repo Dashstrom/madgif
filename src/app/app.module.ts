@@ -21,6 +21,7 @@ import { ImagesService } from './services/images.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditionComponent } from './edition/edition.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MadFooterComponent,
     ImageCreditComponent,
     HomeCarouselComponent,
-    HomeLandingInfoComponent
+    HomeLandingInfoComponent,
+    EditionComponent
   ],
   imports: [
     BrowserModule,

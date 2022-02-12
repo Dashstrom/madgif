@@ -1,0 +1,41 @@
+<div id="wrapper">
+  <div id="tools">
+    <div class="tools-group">
+      <button id="resize" (click)="setState(RESIZE)"></button>
+      <button id="crop" (click)="setState(CROP)"></button>
+      <button id="rotate" (click)="setState(ROTATE)"></button>
+      <button id="download" (click)="setState(DOWNLOAD)"></button>
+    </div>
+  </div>
+  <div id="settings">
+    <ng-container *ngIf="hasState(RESIZE)">
+      <label for="x-resize">Décalage X</label>
+      <input id="x-resize" name="x-resize">
+      <label for="y-resize">Décalage Y</label>
+      <input id="y-resize" name="y-resize">
+      <label for="w-resize">Largeur</label>
+      <input id="w-resize" name="w-resize">
+      <label for="h-resize">Hauteur</label>
+      <input id="h-resize" name="h-resize">
+    </ng-container>
+    <ng-container *ngIf="hasState(CROP)">
+      CROP
+    </ng-container>
+    <ng-container *ngIf="hasState(ROTATE)">
+      ROTATE
+    </ng-container>
+    <ng-container *ngIf="hasState(DOWNLOAD)">
+      DOWNLOAD
+    </ng-container>
+  </div>
+  <div id="canvas">
+    <div *ngIf="!iid">
+      Uploader une image ou la prendre depuis la galerie
+      <a routerLink="/gallery">Galerie</a>
+    </div>
+    <div *ngIf="iid">
+      <img [attr.src]="src">
+    </div>
+  </div>
+</div>
+<app-mad-footer></app-mad-footer>

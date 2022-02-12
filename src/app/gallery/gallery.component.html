@@ -17,7 +17,7 @@
       <a [href]="photo.imgURL" target="_blank"><img [src]="photo.imgURL" alt="image amusante" /></a>
       <div class="hide bg-black-transparent">
         <div class="hide bottom-left-txt"><a href="#" target="_blank"><img class="icon" src="../../assets/img/send.png"></a></div>
-        <div class="hide bottom-left-txt2"><a href="#" target="_blank"><img class="icon" src="../../assets/img/pencil.png"></a></div>
+        <div class="hide bottom-left-txt2"><a [routerLink]="['/edition', photo.id]"><img class="icon" src="../../assets/img/pencil.png"></a></div>
         <div class="hide bottom-left-txt3"><a href="#" target="_blank"><img class="icon" src="../../assets/img/garbage.png"></a></div>
         <div class="hide bottom-right-txt">{{ photo.uploadDate | date:'d MMMM yyyy' }}</div>
       </div>
