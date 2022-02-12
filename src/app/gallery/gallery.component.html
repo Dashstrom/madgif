@@ -1,10 +1,13 @@
 <div class="gallery-info mx-4 mt-5 pb-4">
   <h2>
     Galerie
-    <!--<button>
-      <img class="icon" src="" alt="upload"/>
-    </button>-->
   </h2>
+</div>
+<div>
+  <input type="file" (change)="onChange()">
+  <button class="btn" (click)="onUpload()">
+    Upload
+  </button>
 </div>
 <div class="container gallery pb-3" *ngIf="photos">
   <div

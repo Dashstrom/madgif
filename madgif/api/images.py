@@ -3,6 +3,7 @@ import uuid
 
 from flask import Blueprint, jsonify, request, send_file
 from flask_restful import Api
+from flask_cors import cross_origin
 from werkzeug.utils import secure_filename
 
 from ..extensions import db
@@ -16,6 +17,7 @@ images_wrap = Api(images)
 
 @images.route('', methods=['POST'])
 @jwt_required
+@cross_origin()
 def upload_image(user):
     if 'file' not in request.files:
         return jsonify({'msg': 'No file part'}), 400
@@ -39,6 +41,7 @@ def upload_image(user):
 
 @images.route('', methods=['GET'])
 @jwt_required
+@cross_origin()
 def get_images(user):
     imgs = Image.query.filter_by(author_id=user.id)
     return jsonify([img.json() for img in imgs]), 200
@@ -46,6 +49,7 @@ def get_images(user):
 
 @images.route('/<string:iid>', methods=['GET'])
 @jwt_required
+@cross_origin()
 def get_image_by_id(user, iid):
     img = Image.query.filter_by(author_id=user.id, public_id=iid).first()
     return jsonify(img.json()), 200
@@ -53,6 +57,7 @@ def get_image_by_id(user, iid):
 
 @images.route('/<string:iid>/raw', methods=['GET'])
 @jwt_required
+@cross_origin()
 def get_raw_image_by_id(user, iid):
     img = Image.query.filter_by(author_id=user.id, public_id=iid).first()
     return send_file(BytesIO(img.raw), filename_to_minetype(img.name)), 200
@@ -60,6 +65,7 @@ def get_raw_image_by_id(user, iid):
 
 @images.route('/<string:iid>', methods=['UPDATE'])
 @jwt_required
+@cross_origin()
 def update_image(user, iid):
     if 'file' not in request.files:
         return jsonify({'msg': 'No file part'}), 400
@@ -78,6 +84,7 @@ def update_image(user, iid):
 
 @images.route('/<string:iid>', methods=['DELETE'])
 @jwt_required
+@cross_origin()
 def delete_image_by_id(user, iid):
     Image.img(user.id, iid).delete()
     return jsonify({"msg": "Deleted"}), 200

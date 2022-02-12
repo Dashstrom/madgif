@@ -1,5 +1,6 @@
-cryptography
+cryptography==3.2
 Flask~=2.0.2
+flask_cors
 datetime~=4.3
 uuid~=1.30
 Flask-SQLAlchemy

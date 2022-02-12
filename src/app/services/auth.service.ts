@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { API } from '../constants';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class AuthService {
 
   login(username: string, password: string): Observable<void> {
     return new Observable(o => {
-      this.http.post("/auth/login", { username, password }).subscribe(
+      this.http.post(API + "/auth/login", { username, password }).subscribe(
         res => {
           this.setToken(res['token']);
           o.next();
@@ -43,7 +44,7 @@ export class AuthService {
 
   register(username: string, password: string): Observable<void> {
     return new Observable(o => {
-      this.http.post("/auth/register", { username, password }).subscribe(
+      this.http.post(API + "/auth/register", { username, password }).subscribe(
         res => {
           this.setToken(res['token']);
           o.next();
