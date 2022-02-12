@@ -3,8 +3,8 @@
     Galerie
   </h2>
 </div>
-<div>
-  <input type="file" (change)="onChange()">
+<div class="d-flex flex-column justify-content-center text-center align-items-center mb-4">
+  <input type="file" (change)="onChange($event)">
   <button class="btn" (click)="onUpload()">
     Upload
   </button>

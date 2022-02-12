@@ -68,10 +68,7 @@ export class ImagesService {
   }
 
   getImages(): any {
-    return this.http.get(API + 'images').subscribe(
-      res => { console.log(res) },
-      err => { console.error(err) }
-    )
+    return this.http.get(API + 'images');
   }
 
   getImageById(iid: string): void {

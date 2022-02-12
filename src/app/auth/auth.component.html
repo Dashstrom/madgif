@@ -1,35 +1,46 @@
 <div class="container-fluid auth-wrapper d-flex justify-content-center align-items-center">
+  
   <div class="auth-block pb-1">
     <h2 class="mx-4 mt-3 mb-4">{{ titleForm }}</h2>
-    
+
+    <ngb-alert [type]="'danger'" [dismissible]="false"
+      class="mx-3 w-40 p-1" *ngIf="authErrorPresence">
+      {{ authErrorMsg }}
+    </ngb-alert>
+
     <form *ngIf='!register' class="row justify-content-center align-self-center text-center" (ngSubmit)="onSubmit(formGroup.value)" [formGroup]="formGroup">
       
-      <div class="col-lg-4 mt-4 mx-4 px-0 d-flex flex-row auth-line">
+      <div class="col-lg-10 mt-4 mx-4 px-0 d-flex flex-row auth-line">
         <label for="username"><img class="icon position-relative mr-3" src="../../assets/img/auth/user.png" alt=""/></label>
         <input class="" type="text" autofocus name="username" id="username"
-          placeholder="Nom d'utilisateur" formControlName="username">
-        <ngb-alert [type]="'danger'" *ngIf="!register && submitted && form.username.errors" [dismissible]="false"
-          class="w-50 col-lg-4">
-          Erreur
+          placeholder="Nom d'utilisateur" formControlName="username" required>
+        <ngb-alert [type]="'danger'" *ngIf="!register && submitted && form.username.errors?.required" [dismissible]="false"
+          class="col-lg-4 p-1">
+          Champ requis
         </ngb-alert>
       </div>
       
 
-      <div class="col-lg-4 mt-4 mx-4 px-0 d-flex flex-row auth-line">
+      <div class="col-lg-10 mt-4 mx-4 px-0 d-flex flex-row auth-line">
         <label for="password"><img class="icon mr-3" src="../../assets/img/auth/lock.png" alt=""/></label>
         <input class="" type="password" name="password" id="password"
           placeholder="Mot de passe" formControlName="password" required>
+        <ngb-alert [type]="'danger'" *ngIf="!register && submitted && form.password.errors?.required" [dismissible]="false"
+          class="col-lg-4 p-1">
+          Champ requis
+        </ngb-alert>
       </div>
 
-      <div class="col-lg-1 my-4 d-flex flex-row justify-content-center align-self-center text-center">
+      <div class="col-lg-10 my-4 d-flex flex-row justify-content-center align-self-center text-center">
         <button class="p-0" type="submit">
-          <img class="icon" src="../../assets/img/auth/checked.png" alt="show section"/>
+          <img class="icon" src="../../assets/img/auth/next.png" alt="show section"/>
         </button>
       </div>
 
       <div>
         <label for="isRegistering"></label>
-        <input [checked]="register" type="checkbox" name="isRegistering" id="isRegistering" hidden>
+        <input type="text" name="isRegistering"
+          id="isRegistering" formControlName="isRegistering" hidden>
       </div>
 
     </form>
@@ -46,18 +57,36 @@
         <label for="password"><img class="icon mr-3" src="../../assets/img/auth/lock.png" alt=""/></label>
         <input class="" type="password" name="password" id="password"
           placeholder="Mot de passe" formControlName="password" required>
+        <ngb-alert [type]="'danger'" *ngIf="register && submitted && form.password.errors?.required" [dismissible]="false"
+          class="col-lg-4 p-1">
+          Champ requis
+        </ngb-alert>
       </div>
 
       <div class="col-lg-10 mt-4 mx-4 px-0 d-flex flex-row auth-line">
         <label for="confirmPassword"><img class="icon mr-3" src="../../assets/img/auth/lock.png" alt=""/></label>
         <input class="" type="password" name="confirmPassword" id="confirmPassword"
           placeholder="Confirmer Mot de passe" formControlName="confirmPassword" required>
+        <ngb-alert [type]="'danger'" *ngIf="register && submitted && form.confirmPassword.errors?.required" [dismissible]="false"
+          class="col-lg-4 p-1">
+          Champ requis
+        </ngb-alert>
+        <ngb-alert [type]="'danger'" *ngIf="register && submitted && form.confirmPassword.errors?.mustMatch" [dismissible]="false"
+          class="col-lg-4 p-1">
+          Les mots de passe doivent être identiques
+        </ngb-alert>
       </div>
 
       <div class="col-lg-10 my-4 d-flex flex-row justify-content-center align-self-center text-center">
         <button class="p-0" type="submit">
-          <img class="icon" src="../../assets/img/auth/checked.png" alt="show section"/>
+          <img class="icon" src="../../assets/img/auth/next.png" alt="show section"/>
         </button>
+      </div>
+
+      <div>
+        <label for="isRegistering"></label>
+        <input type="text" name="isRegistering"
+          id="isRegistering" formControlName="isRegistering" hidden>
       </div>
 
     </form>
@@ -67,8 +96,7 @@
     </div>
     
   </div>
-    
-  
+
 </div>
 
 <app-mad-footer></app-mad-footer>
