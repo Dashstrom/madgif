@@ -1,0 +1,16 @@
+mat-sidenav{
+width: 15%;
+
+}
+mat-nav-list{
+    justify-content: space-between;
+    color:white;
+}
+mat-list-item{
+    font: rgba(255, 255, 255, 0.747);
+}
+mat-toolbar{
+    height: 0px;
+    display: inline-block;
+    z-index: 300;
+}

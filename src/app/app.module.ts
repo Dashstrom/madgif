@@ -24,6 +24,11 @@ import { EditionComponent } from './edition/edition.component';
 import { FormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './guards/auth.guard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
+import { MadNavComponent } from './mad-nav/mad-nav.component';
+
+
 
 @NgModule({
   declarations: [
@@ -36,7 +41,8 @@ import { AuthGuard } from './guards/auth.guard';
     HomeLandingInfoComponent,
     AuthComponent,
     HomeLandingInfoComponent,
-    EditionComponent
+    EditionComponent,
+    MadNavComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +50,14 @@ import { AuthGuard } from './guards/auth.guard';
     NgbModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MaterialModule
+  ],
+  exports:[
+    BrowserAnimationsModule,
+    MaterialModule,
+    FormsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: "fr-FR" },
