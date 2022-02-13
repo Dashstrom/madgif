@@ -17,7 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
     // TODO check the url
     if (this.auth.isAuth()) {
       let cloned = req.clone({
-        setHeaders: {"x-access-tokens": this.auth.getToken()}
+        setHeaders: { "x-access-tokens": this.auth.getToken() }
       });
       return next.handle(cloned);
     } else {

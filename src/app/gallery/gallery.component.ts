@@ -24,7 +24,7 @@ export class GalleryComponent implements OnInit {
   }
 
   onChange(event) {
-    this.file2upload = event.target.files[0]; 
+    this.file2upload = event.target.files[0];
   }
 
   onUpload() {

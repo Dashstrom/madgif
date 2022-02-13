@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import logging
+
 from flask import Flask
 from flask_cors import CORS
 
@@ -17,6 +19,7 @@ def create_app(app_name=None):
     app = Flask(app_name)
     app.config.from_object(Config)
     CORS(app)
+    logging.getLogger('flask_cors').level = logging.DEBUG
     app.register_blueprint(auth)
     app.register_blueprint(images)
     db.init_app(app)

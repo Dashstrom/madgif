@@ -1,0 +1,75 @@
+@import "../../variables.scss";
+
+
+#wrapper {
+    width: 100%;
+    height: 300px;
+}
+
+#tools {
+    background-color: $primary;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding: auto;
+
+    .tools-group {
+        margin: auto;
+        display: block;
+        width: fit-content;
+    }
+
+    button {
+        background-color: $secondary;
+        width: 50px;
+        height: 50px;
+        background-position: 11px 11px;
+        background-size: 28px;
+        background-repeat: no-repeat;
+        padding: 0;
+        margin: 0;
+        margin-left: 10px;
+        margin-right: 10px;
+        border: 0;
+        border-radius: 50%;
+        transition: filter 0.1s;
+        outline: none;
+    }
+
+    button:hover {
+        filter: brightness(1.2);
+    }
+
+    button:active {
+        filter: brightness(1.5);
+
+    }
+
+    #resize {
+        background-image: url("/assets/img/resize.png");
+    }
+
+    #crop {
+        background-image: url("/assets/img/crop.png");
+
+    }
+
+    #rotate {
+        background-image: url("/assets/img/rotate.png");
+    }
+
+    #download {
+        background-image: url("/assets/img/download.png");
+    }
+}
+
+#settings {
+    background-color: $secondary;
+    width: 100%;
+    height: 200px;
+}
+  
+#canvas {
+    width: 100%;
+    height: 200px;
+}

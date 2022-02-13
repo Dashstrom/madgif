@@ -23,6 +23,13 @@ def extension(filename: str):
     return filename.rsplit('.', 1)[1].lower()
 
 
+def rename(newname):
+    def decorator(f):
+        f.__name__ = newname
+        return f
+    return decorator
+
+
 def allowed_file(filename: str) -> bool:
     return extension(filename) in TYPES
 

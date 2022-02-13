@@ -15,6 +15,24 @@ images = Blueprint('images', __name__, url_prefix='/images')
 images_wrap = Api(images)
 
 
+@images.route('', methods=['OPTIONS'])
+@cross_origin()
+def get_images_options():
+    return jsonify({"msg": "ok"}), 200
+
+
+@images.route('/<string:iid>', methods=['OPTIONS'])
+@cross_origin()
+def get_image_by_id_options():
+    return jsonify({"msg": "ok"}), 200
+
+
+@images.route('/<string:iid>/raw', methods=['OPTIONS'])
+@cross_origin()
+def get_raw_image_by_id_options():
+    return jsonify({"msg": "ok"}), 200
+
+
 @images.route('', methods=['POST'])
 @jwt_required
 @cross_origin()
@@ -60,6 +78,8 @@ def get_image_by_id(user, iid):
 @cross_origin()
 def get_raw_image_by_id(user, iid):
     img = Image.query.filter_by(author_id=user.id, public_id=iid).first()
+    if img is None:
+        return jsonify({"msg": "Can't find image"}), 404
     return send_file(BytesIO(img.raw), filename_to_minetype(img.name)), 200
 
 
@@ -87,4 +107,5 @@ def update_image(user, iid):
 @cross_origin()
 def delete_image_by_id(user, iid):
     Image.img(user.id, iid).delete()
+    db.session.commit()
     return jsonify({"msg": "Deleted"}), 200

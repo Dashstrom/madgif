@@ -20,8 +20,10 @@ import { ImagesService } from './services/images.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditionComponent } from './edition/edition.component';
 import { FormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { AuthComponent } from './auth/auth.component';
     ImageCreditComponent,
     HomeCarouselComponent,
     HomeLandingInfoComponent,
-    AuthComponent
+    AuthComponent,
+    HomeLandingInfoComponent,
+    EditionComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,8 @@ import { AuthComponent } from './auth/auth.component';
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     DatePipe,
     AuthService,
-    ImagesService
+    ImagesService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,5 @@
 cryptography==3.2
 Flask~=2.0.2
-flask_cors
 datetime~=4.3
 uuid~=1.30
 Flask-SQLAlchemy
@@ -11,6 +10,7 @@ Flask-RESTful
 Flask-Testing
 Flask-Login
 flask-bcrypt
+flask-cors
 Pillow~=9.0.1
 Werkzeug~=2.0.2
 
