@@ -7,6 +7,7 @@ cd madgif
 ```
 
 ## Commands
+- `sudo npm install --save @angular/material@7 @angular/cdk@7 @angular/animations@7`
 - `export FLASK_ENV=development`: Set debug mod
 - `flask run`: Run the api
 - `flask db init`: init database
