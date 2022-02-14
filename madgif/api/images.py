@@ -1,4 +1,5 @@
 from io import BytesIO
+from time import time
 import uuid
 
 from flask import Blueprint, jsonify, request, send_file
@@ -8,8 +9,8 @@ from werkzeug.utils import secure_filename
 
 from ..extensions import db
 from ..decorators import jwt_required
-from ..models import Image
-from ..utils import allowed_file, filename_to_minetype
+from ..models import Image, User
+from ..utils import allowed_file, b2img, filename_to_minetype, img2io
 
 images = Blueprint('images', __name__, url_prefix='/images')
 images_wrap = Api(images)
@@ -23,20 +24,26 @@ def get_images_options():
 
 @images.route('/<string:iid>', methods=['OPTIONS'])
 @cross_origin()
-def get_image_by_id_options():
+def get_image_options():
     return jsonify({"msg": "ok"}), 200
 
 
 @images.route('/<string:iid>/raw', methods=['OPTIONS'])
 @cross_origin()
-def get_raw_image_by_id_options():
+def get_raw_image_options():
+    return jsonify({"msg": "ok"}), 200
+
+
+@images.route('/<string:iid>/edit', methods=['OPTIONS'])
+@cross_origin()
+def edit_image_options():
     return jsonify({"msg": "ok"}), 200
 
 
 @images.route('', methods=['POST'])
 @jwt_required
 @cross_origin()
-def upload_image(user):
+def upload_image(user: User):
     if 'file' not in request.files:
         return jsonify({'msg': 'No file part'}), 400
     file = request.files['file']
@@ -60,7 +67,7 @@ def upload_image(user):
 @images.route('', methods=['GET'])
 @jwt_required
 @cross_origin()
-def get_images(user):
+def get_images(user: User):
     imgs = Image.query.filter_by(author_id=user.id)
     return jsonify([img.json() for img in imgs]), 200
 
@@ -68,25 +75,32 @@ def get_images(user):
 @images.route('/<string:iid>', methods=['GET'])
 @jwt_required
 @cross_origin()
-def get_image_by_id(user, iid):
-    img = Image.query.filter_by(author_id=user.id, public_id=iid).first()
+def get_image(user: User, iid: str):
+    img = Image.img(user.id, iid)
+    if img is None:
+        return jsonify({"msg": "Can't find image"}), 404
     return jsonify(img.json()), 200
 
 
 @images.route('/<string:iid>/raw', methods=['GET'])
 @jwt_required
 @cross_origin()
-def get_raw_image_by_id(user, iid):
-    img = Image.query.filter_by(author_id=user.id, public_id=iid).first()
+def get_raw_image(user: User, iid: str):
+    img = Image.img(user.id, iid)
     if img is None:
         return jsonify({"msg": "Can't find image"}), 404
     return send_file(BytesIO(img.raw), filename_to_minetype(img.name)), 200
 
 
-@images.route('/<string:iid>', methods=['UPDATE'])
+def report(img):
+    img.save(f"render/{time() * 1_000_000:.0f}.png")
+    print(img)
+
+
+@images.route('/<string:iid>', methods=['PUT'])
 @jwt_required
 @cross_origin()
-def update_image(user, iid):
+def update_image(user: User, iid: str):
     if 'file' not in request.files:
         return jsonify({'msg': 'No file part'}), 400
     file = request.files['file']
@@ -95,9 +109,53 @@ def update_image(user, iid):
     if not file or not allowed_file(file.filename):
         return jsonify({'msg': 'Invalid file type'})
     filename = secure_filename(file.filename)
-    img = Image.img(user.id, iid).first()
+    img = Image.img(user.id, iid)
+    if img is None:
+        return jsonify({"msg": "Can't find image"}), 404
     img.name = filename
     img.raw = file.read()
+    db.session.commit()
+    return jsonify({"msg": "Updated"}), 200
+
+
+@images.route('/<string:iid>/edit', methods=['POST'])
+@jwt_required
+@cross_origin()
+def edit_image(user: User, iid: str):
+    img = Image.img(user.id, iid)
+    if img is None:
+        return jsonify({"msg": 'Not found'}), 404
+    data: dict = request.get_json()
+    if not isinstance(data, dict):
+        return jsonify({"msg": 'Wrong json'}), 404
+
+    im = b2img(img.raw)
+
+    w, h = im.size
+    w, h = int(data.get('w', w)), int(data.get('h', h))
+    rotate = int(data.get('rotate', 0))
+    cropX, cropY = int(data.get('cropX', 0)), int(data.get('cropY', 0))
+    cropW, cropH = int(data.get('cropW', w)), int(data.get('cropH', h))
+
+    resizing = ('w' in data or 'h' in data) and (w, h) != im.size
+    croping = any("crop" + c in data for c in 'XYWH')
+    rotating = rotate != 0
+
+    if resizing:
+        im = im.resize((w, h))
+
+    if rotating:
+        if croping:
+            im = im.rotate(rotate, expand=1)
+            cropX += (im.size[0] - w) / 2
+            cropY += (im.size[1] - h) / 2
+        else:
+            im = im.rotate(rotate)
+
+    if croping:
+        im = im.crop((cropX, cropY, cropX + cropW, cropY + cropH))
+
+    img.raw = img2io(im, img.ext()).read()
     db.session.commit()
     return jsonify({"msg": "Updated"}), 200
 
@@ -105,7 +163,7 @@ def update_image(user, iid):
 @images.route('/<string:iid>', methods=['DELETE'])
 @jwt_required
 @cross_origin()
-def delete_image_by_id(user, iid):
-    Image.img(user.id, iid).delete()
+def delete_image(user: User, iid: str):
+    Image.query.filter_by(author_id=user.id, public_id=iid).delete()
     db.session.commit()
     return jsonify({"msg": "Deleted"}), 200

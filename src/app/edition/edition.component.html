@@ -1,40 +1,80 @@
 <div id="wrapper">
-  <div id="tools">
-    <div class="tools-group">
-      <button id="resize" (click)="setState(RESIZE)"></button>
-      <button id="crop" (click)="setState(CROP)"></button>
-      <button id="rotate" (click)="setState(ROTATE)"></button>
-      <button id="download" (click)="setState(DOWNLOAD)"></button>
+  <div id="settings">
+    <div>
+      <label for="s-w">Dimentions</label>
+      <input id="s-w" name="s-w" [(ngModel)]="w">
+      <label for="s-h" hidden="true">Dimentions H </label>
+      <input id="s-h" name="s-h" [(ngModel)]="h">
+    </div>
+    <div>
+      <label for="s-rotate">Rotation</label>
+      <input id="s-rotate" name="s-rotate" [(ngModel)]="rotate">
+    </div>
+    <div>
+      <label for="s-cropX">Crop Box</label>
+      <input id="s-cropX" name="s-cropX" [(ngModel)]="cropX">
+  
+      <label for="s-cropY" hidden="true">CropY</label>
+      <input id="s-cropY" name="s-cropY" [(ngModel)]="cropY">
+  
+      <label for="s-cropW" hidden="true">CropW</label>
+      <input id="s-cropW" name="s-cropW" [(ngModel)]="cropW">
+  
+      <label for="s-cropH" hidden="true">CropH</label>
+      <input id="s-cropH" name="s-cropH" [(ngModel)]="cropH">
+    </div>
+    <div>
+      <label for="s-zoom">Zoom</label>
+      <input id="s-zoom" name="s-zoom" [(ngModel)]="zoom">
+    </div>
+    <div>
+      <label for="s-x">Positions</label>
+      <input id="s-x" name="s-x" [(ngModel)]="x">
+  
+      <label for="s-y" hidden="true">Y</label>
+      <input id="s-y" name="s-y" [(ngModel)]="y">
+    </div>
+    <div>
+      <button id="download" (click)="download()"></button>
+      <button id="upload" (click)="upload()"></button>
     </div>
   </div>
-  <div id="settings">
-    <ng-container *ngIf="hasState(RESIZE)">
-      <label for="x-resize">Décalage X</label>
-      <input id="x-resize" name="x-resize">
-      <label for="y-resize">Décalage Y</label>
-      <input id="y-resize" name="y-resize">
-      <label for="w-resize">Largeur</label>
-      <input id="w-resize" name="w-resize">
-      <label for="h-resize">Hauteur</label>
-      <input id="h-resize" name="h-resize">
-    </ng-container>
-    <ng-container *ngIf="hasState(CROP)">
-      CROP
-    </ng-container>
-    <ng-container *ngIf="hasState(ROTATE)">
-      ROTATE
-    </ng-container>
-    <ng-container *ngIf="hasState(DOWNLOAD)">
-      DOWNLOAD
-    </ng-container>
-  </div>
-  <div id="canvas">
+  <div
+    id="canvas"
+    (mousedown)="onMouseDownCanvas($event)"
+    (window:mouseup)="onMouseUp($event)"
+    (wheel)="onMouseWheel($event)"
+    #canvas
+  >
     <div *ngIf="!iid">
       Uploader une image ou la prendre depuis la galerie
       <a routerLink="/gallery">Galerie</a>
     </div>
-    <div *ngIf="src">
-      <img [src]="src"/>
+    <div style="position: relative;" *ngIf="src">
+      <div [ngStyle]="{
+        'position': 'absolute',
+        'top.px': y + cropY * zoom,
+        'left.px': x + cropX * zoom,
+        'width.px': cropW * zoom,
+        'height.px': cropH * zoom
+      }" #wrapperTarget id="wrapperTarget">
+        <div (mousedown)="nwCrop($event)" id="nw-crop"></div>
+        <div (mousedown)="seCrop($event)" id="se-crop"></div>
+        <div [ngStyle]="{
+          'position': 'absolute',
+          'top.px': -cropY * zoom,
+          'left.px': -cropX * zoom,
+          'width.px': w * zoom,
+          'height.px': h * zoom,
+          'transform': 'rotate(' + (-rotate) +'deg)'
+        }">
+          <div (mousedown)="onRotate($event)" id="ne-rotate"></div>
+          <img draggable="false" [src]="src" [ngStyle]="{
+          'width.px': w * zoom,
+          'height.px': h * zoom
+          }" #target id="target"/>
+        </div>
+      </div>
     </div>
   </div>
 </div>

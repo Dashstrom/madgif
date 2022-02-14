@@ -1,3 +1,4 @@
+from typing import Optional
 from sqlalchemy import (
   Column,
   Integer,
@@ -13,6 +14,26 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
 from .extensions import db
+from .utils import extension
+
+
+def col_creation() -> Column:
+    return Column(
+        TIMESTAMP,
+        nullable=False,
+        server_default=func.now(),
+        index=True
+    )
+
+
+def col_update() -> Column:
+    return Column(
+        TIMESTAMP,
+        nullable=False,
+        server_default=func.now(),
+        onupdate=func.now(),
+        index=True
+    )
 
 
 class User(db.Model):
@@ -26,8 +47,8 @@ class User(db.Model):
     username = Column(String(50), nullable=False, index=True)
     password = Column(String(128), nullable=False)
     admin = Column(Boolean, nullable=False)
-    date_creation = Column(TIMESTAMP, nullable=False, server_default=func.now(), index=True)
-    date_update = Column(TIMESTAMP, nullable=False, server_default=func.now(), onupdate=func.now(), index=True)
+    date_creation = col_creation()
+    date_update = col_update()
     query: BaseQuery
 
 
@@ -39,8 +60,8 @@ class Image(db.Model):
     author = relationship("User", foreign_keys=[author_id])
     name = Column(String(1024), nullable=False)
     raw = Column(LargeBinary(length=(1 << 32) - 1), nullable=False)
-    date_creation = Column(TIMESTAMP, nullable=False, server_default=func.now())
-    date_update = Column(TIMESTAMP, nullable=False, server_default=func.now(), onupdate=func.now())
+    date_creation = col_creation()
+    date_update = col_update()
     query: BaseQuery
 
     def json(self):
@@ -56,5 +77,9 @@ class Image(db.Model):
         }
 
     @classmethod
-    def img(cls, user_id, public_id):
-        return cls.query.filter_by(author_id=user_id, public_id=public_id)
+    def img(cls, user_id: int, public_id: str) -> Optional['Image']:
+        res = cls.query.filter_by(author_id=user_id, public_id=public_id)
+        return res.first()
+
+    def ext(self) -> str:
+        return extension(self.name)

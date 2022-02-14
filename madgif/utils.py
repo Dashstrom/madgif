@@ -1,5 +1,5 @@
-from io import BytesIO
-from PIL import Image
+import io
+import PIL.Image
 
 
 TYPES = {
@@ -10,24 +10,22 @@ TYPES = {
 }
 
 
-def img2io(img: Image.Image, ext: str = "png"):
-    img_io = BytesIO()
+def img2io(img: PIL.Image.Image, ext: str = "png"):
+    img_io = io.BytesIO()
     img.save(img_io, ext)
     img_io.seek(0)
     return img_io
 
 
-def extension(filename: str):
+def b2img(data: bytes) -> PIL.Image.Image:
+    img_io = io.BytesIO(data)
+    return PIL.Image.open(img_io)
+
+
+def extension(filename: str) -> str:
     if '.' not in filename:
         return ""
     return filename.rsplit('.', 1)[1].lower()
-
-
-def rename(newname):
-    def decorator(f):
-        f.__name__ = newname
-        return f
-    return decorator
 
 
 def allowed_file(filename: str) -> bool:
