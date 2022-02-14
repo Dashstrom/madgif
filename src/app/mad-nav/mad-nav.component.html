@@ -1,15 +1,14 @@
 <mat-sidenav-container>
     <mat-sidenav  #sidenav="matSidenav" fixedInViewport="true" mode="side" [(opened)]="opened">
         <mat-toolbar>Menu</mat-toolbar>
-        <span></span>
         <mat-nav-list >
-            <a routerLinkActive="active" [routerLink]="['']" mat-list-item >Acceuil <mat-icon matListIcon>home</mat-icon></a>
-            <a routerLinkActive="active" [routerLink]="['gallery']" mat-list-item >Gallery <mat-icon matListIcon>collections</mat-icon></a>
+            <a routerLinkActive="active" [routerLink]="['']" mat-list-item >Accueil <mat-icon matListIcon>home</mat-icon></a>
+            <a routerLinkActive="active" [routerLink]="['gallery']" mat-list-item >Galerie <mat-icon matListIcon>collections</mat-icon></a>
             <a routerLinkActive="active" [routerLink]="['edition']"mat-list-item >Edition <mat-icon matListIcon>edit</mat-icon></a>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-        <mat-toolbar class="position-fixed">
+        <mat-toolbar class="position-fixed" id="noh">
             <button mat-button (click)="opened=!opened">
                 <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
                 <mat-icon *ngIf="sidenav.opened">close</mat-icon>
