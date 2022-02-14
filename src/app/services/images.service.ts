@@ -1,4 +1,5 @@
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
+import { ThrowStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Observable} from 'rxjs';
@@ -22,10 +23,7 @@ export class ImagesService {
   }
 
   getImages(): any {
-    return this.http.get(API + 'images').subscribe(
-      res => { console.log(res); },
-      err => { console.error(err); }
-    )
+    return this.http.get(API + 'images');
   }
 
   getImageById(iid: string): Observable<any> {
@@ -42,7 +40,7 @@ export class ImagesService {
         o.error({status: 400, msg: "Missing public_id"});
         return;
       }
-      this.http.get(`${API}images/${iid}/raw`, {responseType: 'blob'}).subscribe(
+      this.http.get(`${API}images/${iid}/raw`, { responseType: 'blob' }).subscribe(
         res => {
           const url = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(<any>res));
           o.next(url);
@@ -61,6 +59,9 @@ export class ImagesService {
   }
 
   deleteImageById(iid: string): void {
-
+    this.http.delete(`${API}images/${iid}`).subscribe(
+      res => console.log(res),
+      err => console.error(err)
+    )
   }
 }

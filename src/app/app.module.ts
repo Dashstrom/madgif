@@ -24,6 +24,7 @@ import { EditionComponent } from './edition/edition.component';
 import { FormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './guards/auth.guard';
+import { UploadImageComponent } from './upload-image/upload-image.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AuthGuard } from './guards/auth.guard';
     HomeLandingInfoComponent,
     AuthComponent,
     HomeLandingInfoComponent,
-    EditionComponent
+    EditionComponent,
+    UploadImageComponent
   ],
   imports: [
     BrowserModule,

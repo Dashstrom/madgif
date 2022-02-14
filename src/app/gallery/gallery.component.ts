@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ThrowStmt } from '@angular/compiler';
+import { Component, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Photo } from '../model/gallery.model';
 import { ImagesService } from '../services/images.service';
 
@@ -8,23 +10,76 @@ import { ImagesService } from '../services/images.service';
   styleUrls: ['./gallery.component.scss']
 })
 export class GalleryComponent implements OnInit {
-  photos!: Photo[];
-  file2upload!: File;
+  photos: Photo[] = [];
+  amountPhotos: number = 0;
 
-  constructor(private imagesService: ImagesService) {}
+  constructor(
+    private imagesService: ImagesService
+  ) {}
 
   ngOnInit() {
-    this.photos = []; // this.imagesService.photos;
+    this.showNewPictures();
   }
 
-  onChange(event) {
-    this.file2upload = event.target.files[0];
+  onDelete(image: Photo) {
+    this.imagesService.deleteImageById(image.id);
+    var arLength = this.photos.length;
+    var i = 0;
+    while (i < arLength) {
+      if (image.id === this.photos[i].id) {
+        this.photos.splice(i, 1);
+        this.amountPhotos--;
+        arLength = this.photos.length;
+      } else {
+        i++;
+      }
+    }
+    
   }
 
-  onUpload() {
-    this.imagesService.uploadImage(this.file2upload);
-    console.log(this.file2upload);
-    console.log('file uploaded');
+  showNewPictures() {
+    this.loadPictures();
+    console.log(this.photos);
   }
 
+  isPictureAlreadyLoaded(image) {
+    for (let i = 0; i < this.photos.length; i++) {
+      if (image.public_id === this.photos[i].id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  loadPictures() {
+    this.imagesService.getImages().subscribe(
+      res => {
+        for (let i = 0; i < res.length; i++) {
+          this.imagesService.urlRawImageById(res[i].public_id).subscribe(
+            url => {
+              if (!this.isPictureAlreadyLoaded(res[i])) {
+                this.photos.unshift({
+                  id: res[i].public_id,
+                  imgURL: url,
+                  uploadDate: res[i].date_creation,
+                  display: true
+                })
+                this.sortArrayByDate();
+                this.amountPhotos++;
+              }
+            }
+          ) 
+        }
+      },
+      err => { console.error(err) }
+    )
+  }
+
+  sortArrayByDate() {
+    this.photos.sort((a, b) => {
+      if (b.uploadDate > a.uploadDate) return 1;
+      if (b.uploadDate < a.uploadDate) return -1;
+      return 0;
+    })
+  }
 }
