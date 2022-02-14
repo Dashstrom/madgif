@@ -10,24 +10,28 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 export class HomeCarouselComponent implements OnInit {
   carouselImages: Photo[] = [
     {
-      id: 0,
+      id: '0',
       imgURL: '../../assets/img/home/budapest.jpg',
-      uploadDate: new Date()
+      uploadDate: new Date(),
+      display: true
     },
     {
-        id: 1,
+        id: '1',
         imgURL: '../../assets/img/home/goat.jpg',
-        uploadDate: new Date()
+        uploadDate: new Date(),
+        display: true
     },
     {
-        id: 2,
+        id: '2',
         imgURL: '../../assets/img/home/moto-bikes.jpg',
-        uploadDate: new Date()
+        uploadDate: new Date(),
+        display: true
     },
     {
-        id: 3,
+        id: '3',
         imgURL: '../../assets/img/home/school.jpg',
-        uploadDate: new Date()
+        uploadDate: new Date(),
+        display: true
     }
   ]
 

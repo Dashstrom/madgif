@@ -1,0 +1,50 @@
+/* Upload Section */
+
+.select-btn {
+    color: black;
+    border: solid black 3px;
+}
+
+.select-btn:hover {
+    color: pink;
+    border-color: pink;
+    cursor: pointer;
+}
+
+.upload-btn {
+    background-color: transparent;
+    border: none;
+}
+
+.icon, .static-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: initial;
+    filter: none;
+    transition: 0.1s opacity;
+}
+
+.icon:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.filename {
+    font-style: italic;
+}
+
+.loading {
+    animation-name: spin;
+    animation-duration: 5000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}

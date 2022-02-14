@@ -1,5 +1,8 @@
+import { SafeUrl } from "@angular/platform-browser";
+
 export class Photo {
-    id!: number;
-    imgURL!: string;
+    id!: string;
+    imgURL!: SafeUrl;
     uploadDate!: Date;
+    display!: boolean;
 }

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { confirmPasswordOnRegister } from '../customvalidator/customvalidator.validator';
+import { 
+  confirmPasswordOnRegister,
+  checkPasswordComplexity 
+} from '../customvalidator/customvalidator.validator';
 import { Router } from '@angular/router';
 
 @Component({
@@ -36,7 +39,10 @@ export class AuthComponent implements OnInit {
     },
     {
       //Custom validators
-      validator: confirmPasswordOnRegister('password', 'confirmPassword', 'isRegistering')
+      validator: [
+        confirmPasswordOnRegister('password', 'confirmPassword', 'isRegistering'),
+        checkPasswordComplexity('password', 'isRegistering')
+      ]
     })
     this.formGroup.get('isRegistering').disable();
   }

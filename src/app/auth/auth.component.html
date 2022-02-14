@@ -61,6 +61,14 @@
           class="col-lg-4 p-1">
           Champ requis
         </ngb-alert>
+        <ngb-alert [type]="'danger'" *ngIf="register && submitted && form.password.errors?.minlength" [dismissible]="false"
+          class="col-lg-4 p-1">
+          6 caractères minimum
+        </ngb-alert>
+        <ngb-alert [type]="'danger'" *ngIf="register && submitted && form.password.errors?.tooWeak" [dismissible]="false"
+          class="col-lg-4 p-1">
+          Trop faible
+        </ngb-alert>
       </div>
 
       <div class="col-lg-10 mt-4 mx-4 px-0 d-flex flex-row auth-line">
