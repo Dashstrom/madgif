@@ -1,11 +1,11 @@
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
+import { ThrowStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Observable} from 'rxjs';
-import { map } from 'rxjs/operators';
 import { API } from '../constants';
-import { Photo } from '../model/gallery.model';
-
+import { EditQuery } from '../model/gallery.model';
+ 
 @Injectable({
   providedIn: 'root'
 })
@@ -23,14 +23,11 @@ export class ImagesService {
   }
 
   getImages(): any {
-    return this.http.get(API + 'images').subscribe(
-      res => { console.log(res); },
-      err => { console.error(err); }
-    )
+    return this.http.get(API + 'images');
   }
 
-  getImageById(iid: string): void {
-
+  getImageById(iid: string): Observable<any> {
+    return this.http.get(`${API}images/${iid}`);
   }
 
   getRawImageById(iid: string): void {
@@ -39,27 +36,32 @@ export class ImagesService {
 
   urlRawImageById(iid: string): Observable<SafeUrl> {
     return new Observable(o => {
-      console.log("Request " + iid);
       if (iid == null) {
         o.error({status: 400, msg: "Missing public_id"});
         return;
       }
-      this.http.get(`${API}images/${iid}/raw`, {responseType: 'blob'}).subscribe(
+      this.http.get(`${API}images/${iid}/raw`, { responseType: 'blob' }).subscribe(
         res => {
           const url = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(<any>res));
           o.next(url);
         },
-        err => o.error(err),
-        () => o.complete()
+        o.error,
+        o.complete
       );
     });
   }
 
-  updateImage(iid: string): void {
+  editImage(iid: string, query: EditQuery): Observable<any> {
+    return this.http.post(`${API}images/${iid}/edit`, query);
+  }
 
+  updateImage(iid: string): void {
   }
 
   deleteImageById(iid: string): void {
-
+    this.http.delete(`${API}images/${iid}`).subscribe(
+      res => console.log(res),
+      err => console.error(err)
+    )
   }
 }

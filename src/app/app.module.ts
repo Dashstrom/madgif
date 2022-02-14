@@ -29,6 +29,7 @@ import { MaterialModule } from './material/material.module';
 import { MadNavComponent } from './mad-nav/mad-nav.component';
 
 
+import { UploadImageComponent } from './upload-image/upload-image.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,9 @@ import { MadNavComponent } from './mad-nav/mad-nav.component';
     AuthComponent,
     HomeLandingInfoComponent,
     EditionComponent,
-    MadNavComponent
+    MadNavComponent,
+    EditionComponent,
+    UploadImageComponent
   ],
   imports: [
     BrowserModule,

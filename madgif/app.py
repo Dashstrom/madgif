@@ -10,7 +10,7 @@ from .api import auth, images
 from .extensions import db, bcrypt
 
 
-def create_app(app_name=None):
+def create_app(app_name: str = None) -> Flask:
     """Create a Flask app."""
 
     if app_name is None:

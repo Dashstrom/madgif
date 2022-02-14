@@ -42,7 +42,7 @@ def login_user():
     if data and username and password:
         user = User.query.filter_by(username=username).first()
         if user and bcrypt.check_password_hash(user.password, password):
-            exp = datetime.datetime.utcnow() + datetime.timedelta(minutes=60)
+            exp = datetime.datetime.utcnow() + datetime.timedelta(minutes=240)
             token = jwt.encode({
                 'public_id': user.public_id,
                 'exp': exp
