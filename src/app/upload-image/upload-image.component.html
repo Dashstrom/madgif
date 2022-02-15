@@ -4,7 +4,7 @@
   <label class="select-btn py-1 px-3 my-auto" for="imgSelector"
     >CHOISIR UNE IMAGE</label
   >
-  <div class="py-1 px-3 filename">{{ filename }}</div>
+  <div class="py-1 px-3 filename" *ngIf="displayLoading || displayUploadBtn">{{ filename }}</div>
   <input
     type="file"
     (change)="onChange($event)"

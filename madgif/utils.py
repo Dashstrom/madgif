@@ -17,17 +17,20 @@ TYPES_ALIAS = {
 
 def img2io(frames: list[PIL.Image.Image], ext: str = "png", info: dict = None):
     info = info or {}
-    info.pop("format", None)
-    info.pop("save_all", None)
-    info.pop("append_images", None)
+    for banned in ("fp", "format", "save_all", "append_images"):
+        info.pop("format", None)
     img_io = io.BytesIO()
-    frames[0].save(
-        img_io,
-        ext,
-        save_all=True,
-        append_images=frames[1:],
-        **info
-    )
+    if ext == "gif":
+        frames[0].save(
+            img_io,
+            ext,
+            save_all=True,
+            append_images=frames[1:],
+            **info
+        )
+    else:
+        frames[0].save(img_io, ext, **info)
+
     img_io.seek(0)
     return img_io
 

@@ -44,7 +44,6 @@ export class GalleryComponent implements OnInit {
 
   showNewPictures() {
     this.loadPictures();
-    console.log(this.photos);
   }
 
   isPictureAlreadyLoaded(image) {

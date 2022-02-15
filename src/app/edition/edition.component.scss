@@ -85,6 +85,10 @@
   cursor: grab;
 }
 
+#wrapperTarget:active {
+  cursor: grabbing;
+}
+
 %crop {
   z-index: 10;
   display: block;

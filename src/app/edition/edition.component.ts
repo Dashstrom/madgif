@@ -120,7 +120,6 @@ export class EditionComponent implements OnInit {
         this.src = url;
         this.imgs.changes.subscribe((imgs: QueryList<ElementRef>) => {
           this.img = imgs.first;
-          console.log(this.img);
           setTimeout(() => this.onImg(), 250); // TODO: find a beter way
         });
       }, console.error);

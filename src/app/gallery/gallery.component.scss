@@ -4,9 +4,10 @@
 }
 
 /* Gallery */
+.tooltip { pointer-events: none; }
 
 .gallery {
-  margin-bottom: 88px;
+  margin-bottom: calc(100vh - 419px);
 
   .icon {
     width: 30px;

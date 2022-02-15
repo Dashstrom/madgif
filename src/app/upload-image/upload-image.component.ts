@@ -24,8 +24,9 @@ export class UploadImageComponent implements OnInit {
   }
 
   onUpload() {
-    this.displayUploadBtn = false;
+    if (this.displayLoading) return;
     this.displayLoading = true;
+    this.displayUploadBtn = false;
     this.imagesService.uploadImage(this.file2upload).subscribe(
       res => {
         this.filename = "Image mise en ligne avec succès !";

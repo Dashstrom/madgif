@@ -133,7 +133,7 @@ def edit_image(user: User, iid: str):
         return jsonify({"msg": 'Wrong json'}), 404
 
     im = b2img(img.raw)
-    im.seek(im.tell() + 1)  # load all frames
+    # im.seek(im.tell() + 1)  # load all frames
 
     w, h = im.size
     w, h = int(data.get('w', w)), int(data.get('h', h))
