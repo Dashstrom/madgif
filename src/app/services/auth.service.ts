@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { API } from "../constants";
 
@@ -9,7 +10,10 @@ declare const Buffer;
   providedIn: "root",
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   isAuth(): boolean {
     const claims = this.getClaims();
@@ -81,5 +85,6 @@ export class AuthService {
 
   logout(): void {
     this.delToken();
+    this.router.navigate([""]);
   }
 }

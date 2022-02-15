@@ -11,23 +11,26 @@
       class="col-lg-5 col-md-5 col-sm-9 my-3 mx-sm-1 px-0 container4photo"
       *ngFor="let photo of photos"
     >
-      <div *ngIf="photo.display">
-        <a [href]="photo.imgURL" target="_blank"
+      <div>
+        <a [routerLink]="['/edition', photo.id]"
           ><img [src]="photo.imgURL" alt="image amusante"
         /></a>
         <div class="hide bg-black-transparent">
           <div class="hide bottom-left-txt">
-            <a href="#" target="_blank"
-              ><img class="icon" src="../../assets/img/send.png"
+            <a target="_blank" ngbTooltip="Télécharger"
+              placement="bottom" (click)="onDownload(photo)"
+              ><img class="icon" src="../../assets/img/download-gallery.png"
             /></a>
           </div>
           <div class="hide bottom-left-txt2">
-            <a [routerLink]="['/edition', photo.id]"
-              ><img class="icon" src="../../assets/img/pencil.png"
+            <a [href]="photo.imgURL" target="_blank" ngbTooltip="Consulter"
+            placement="bottom"
+              ><img class="icon" src="../../assets/img/loupe.png"
             /></a>
           </div>
           <div class="hide bottom-left-txt3">
-            <a (click)="onDelete(photo)" target="_blank"
+            <a (click)="onDelete(photo)" target="_blank" ngbTooltip="Supprimer"
+            placement="bottom"
               ><img class="icon" src="../../assets/img/garbage.png"
             /></a>
           </div>

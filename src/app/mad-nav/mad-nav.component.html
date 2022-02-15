@@ -10,10 +10,12 @@
       <a routerLinkActive="active" [routerLink]="['']" mat-list-item
         >Accueil <mat-icon matListIcon>home</mat-icon></a
       >
-      <a *ngIf="!auth.isAuth()" routerLinkActive="active" [routerLink]="['/auth']" mat-list-item
+      <a *ngIf="!auth.isAuth()" routerLinkActive="active" [routerLink]="['/auth']"
+        [queryParams]="{ action: 'login' }" mat-list-item
         >Se connecter<mat-icon matListIcon>how_to_reg</mat-icon></a
       >
-      <a *ngIf="!auth.isAuth()" routerLinkActive="active" [routerLink]="['/auth']" mat-list-item
+      <a *ngIf="!auth.isAuth()" routerLinkActive="active" [routerLink]="['/auth']"
+      [queryParams]="{ action: 'register' }" mat-list-item
         >S'inscrire<mat-icon matListIcon>edit_note</mat-icon></a
       >
       <a *ngIf="auth.isAuth()" routerLinkActive="active" [routerLink]="['/gallery']" mat-list-item
@@ -23,7 +25,7 @@
         >Edition <mat-icon matListIcon>edit</mat-icon></a
       >
       <button *ngIf="auth.isAuth()" mat-list-item (click)="auth.logout()"
-        >Logout <mat-icon matListIcon>logout</mat-icon></button
+        >Se déconnecter <mat-icon matListIcon>logout</mat-icon></button
       >
     </mat-nav-list>
   </mat-sidenav>

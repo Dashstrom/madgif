@@ -58,6 +58,10 @@
   #download {
     background-image: url("/assets/img/download.png");
   }
+
+  #refresh:hover,#download:hover {
+    cursor: pointer;
+  }
 }
 
 #canvas {

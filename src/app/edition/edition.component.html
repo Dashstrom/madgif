@@ -35,8 +35,10 @@
       <input id="s-y" name="s-y" [(ngModel)]="y" />
     </div>
     <div>
-      <button id="download" (click)="download()"></button>
-      <button id="refresh" (click)="refresh()"></button>
+      <button id="download" (click)="download()" ngbTooltip="Télécharger"
+      placement="bottom"></button>
+      <button id="refresh" (click)="refresh()" ngbTooltip="Mettre à jour dans la galerie"
+      placement="bottom"></button>
     </div>
   </div>
   <div
