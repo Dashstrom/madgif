@@ -46,9 +46,11 @@
     (wheel)="onMouseWheel($event)"
     #canvas
   >
-    <div *ngIf="!iid">
-      Uploader une image ou la prendre depuis la galerie
-      <a routerLink="/gallery">Galerie</a>
+    <div *ngIf="!iid" id="upload">
+      <app-upload-image (uploadEvent)="uploaded($event)"></app-upload-image>
+      <div class="d-flex flex-row justify-content-center text-center align-items-center mb-4">
+        Choisir une image depuis la <a routerLink="/gallery" class="mx-1"> Galerie</a>
+      </div>
     </div>
     <div style="position: relative" *ngIf="src">
       <div
@@ -90,4 +92,3 @@
     </div>
   </div>
 </div>
-<app-mad-footer></app-mad-footer>

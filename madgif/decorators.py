@@ -29,6 +29,8 @@ def jwt_required(f):
         try:
             data = jwt.decode(token, Config.SECRET_KEY, algorithms=["HS512"])
             current_user = User.query.filter_by(public_id=data['public_id']).first()
+            if current_user is None:
+                raise ValueError("No user match")
         except Exception as e:
             return jsonify({'message': 'token is invalid : ' + str(e)}), 401
 

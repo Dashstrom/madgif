@@ -22,14 +22,16 @@ export class UploadImageComponent implements OnInit {
   }
 
   onUpload() {
-    this.imagesService.uploadImage(this.file2upload);
-    console.log(this.file2upload);
-    console.log("file uploaded");
-    this.displayLoading = true;
-    setTimeout(() => {
-      this.displayLoading = false;
-      this.filename = "Image mise en ligne avec succès !";
-      this.uploadEvent.emit();
-    }, 5000);
+    this.imagesService.uploadImage(this.file2upload).subscribe(
+      res => {
+        console.log(res);
+        this.displayLoading = false;
+        this.filename = "Image mise en ligne avec succès !";
+        this.uploadEvent.emit(res);
+      },
+      err=>{
+        console.error(err);
+      }
+    );
   }
 }

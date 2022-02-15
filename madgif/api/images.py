@@ -2,6 +2,8 @@ from io import BytesIO
 from time import time
 import uuid
 
+import PIL.Image
+import PIL.ImageSequence
 from flask import Blueprint, jsonify, request, send_file
 from flask_restful import Api
 from flask_cors import cross_origin
@@ -61,7 +63,8 @@ def upload_image(user: User):
     )
     db.session.add(img)
     db.session.commit()
-    return jsonify({'public_id': public_id}), 202
+    img = Image.img(user.id, public_id)
+    return jsonify(img.json()), 200
 
 
 @images.route('', methods=['GET'])
@@ -130,6 +133,7 @@ def edit_image(user: User, iid: str):
         return jsonify({"msg": 'Wrong json'}), 404
 
     im = b2img(img.raw)
+    im.seek(im.tell() + 1)  # load all frames
 
     w, h = im.size
     w, h = int(data.get('w', w)), int(data.get('h', h))
@@ -141,21 +145,29 @@ def edit_image(user: User, iid: str):
     croping = any("crop" + c in data for c in 'XYWH')
     rotating = rotate != 0
 
+    frames: list[PIL.Image.Image] = PIL.ImageSequence.all_frames(im)
+
     if resizing:
-        im = im.resize((w, h))
+        for i, frame in enumerate(frames):
+            frames[i] = frame.resize((w, h))
 
     if rotating:
+        for i, frame in enumerate(frames):
+            frames[i] = frame.rotate(rotate)
         if croping:
-            im = im.rotate(rotate, expand=1)
             cropX += (im.size[0] - w) / 2
             cropY += (im.size[1] - h) / 2
-        else:
-            im = im.rotate(rotate)
 
     if croping:
-        im = im.crop((cropX, cropY, cropX + cropW, cropY + cropH))
+        for i, frame in enumerate(frames):
+            frames[i] = frame.crop((
+                cropX,
+                cropY,
+                cropX + cropW,
+                cropY + cropH
+            ))
 
-    img.raw = img2io(im, img.ext()).read()
+    img.raw = img2io(frames, img.ext(), im.info).read()
     db.session.commit()
     return jsonify({"msg": "Updated"}), 200
 

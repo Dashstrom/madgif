@@ -9,7 +9,7 @@ import {
   ViewChildren,
 } from "@angular/core";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { flatMap, map } from "rxjs/operators";
 import { ImagesService } from "../services/images.service";
@@ -85,7 +85,13 @@ export class EditionComponent implements OnInit {
       );
   }
 
+  uploaded(event: any): void {
+    console.log(event);
+    this.router.navigate(["/edition", event["public_id"]]);
+  }
+
   refresh(): void {
+    if (!this.iid) return;
     this.uploadObservable().subscribe();
   }
 
@@ -101,6 +107,7 @@ export class EditionComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     public images: ImagesService,
     private sanitizer: DomSanitizer
   ) {}
@@ -121,6 +128,7 @@ export class EditionComponent implements OnInit {
   }
 
   onImg() {
+    if (!this.iid) return;
     this.cropW = this.w = this.img.nativeElement.width;
     this.cropH = this.h = this.img.nativeElement.height;
     this.px = this.img.nativeElement.pageX;
@@ -128,18 +136,25 @@ export class EditionComponent implements OnInit {
   }
 
   onMouseWheel(event: WheelEvent) {
+    if (!this.iid) return;
     const delta = (event.deltaY + event.deltaX + event.deltaZ) / 100;
     const multi = delta < 0 ? 4 / 3 : delta == 0 ? 1 : 3 / 4;
     const w = this.w * this.zoom;
     const h = this.h * this.zoom;
+    this.zoom = this.zoom * multi;
+    // prevent to small object
+    if (this.zoom < 0.1) {
+      this.zoom = 0.1;
+      return;
+    }
     this.x = Math.round(this.x - (w * multi - w) / 2);
     this.y = Math.round(this.y - (h * multi - h) / 2);
-    this.zoom = this.zoom * multi;
     event.stopImmediatePropagation();
   }
 
   @HostListener("document:mousemove", ["$event"])
   onMouseMoveCanvas(event: MouseEvent | PointerEvent) {
+    if (!this.iid) return;
     if (!this.pressed) return;
 
     const dx = event.pageX - this.px;
@@ -203,14 +218,17 @@ export class EditionComponent implements OnInit {
   }
 
   onMouseUp(event: MouseEvent) {
+    if (!this.iid) return;
     this.pressed = false;
   }
 
   onMouseDownCanvas(event: MouseEvent) {
+    if (!this.iid) return;
     this.down(event, MOVE);
   }
 
   private down(event: MouseEvent, keyState: number = NOTHING) {
+    if (!this.iid) return;
     this.pressed = true;
     this.px = event.pageX;
     this.py = event.pageY;

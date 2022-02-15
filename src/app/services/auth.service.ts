@@ -38,7 +38,15 @@ export class AuthService {
     const token = this.getToken();
     if (token) {
       const b64Payload = token.split(".", 3)[1];
+      if (b64Payload == undefined) {
+        console.error("Error while extracting the Token payload");
+        return null;
+      }
       const JSONpayload = Buffer.from(b64Payload, "base64").toString("binary");
+      if (JSONpayload == undefined) {
+        console.error("Error while decoding the B64Token");
+        return null;
+      }
       const payload = JSON.parse(JSONpayload);
       return payload;
     }

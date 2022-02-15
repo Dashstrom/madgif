@@ -11,17 +11,10 @@ import { EditQuery } from "../model/gallery.model";
 export class ImagesService {
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
-  uploadImage(image: File): void {
+  uploadImage(image: File): Observable<any> {
     const formData = new FormData();
     formData.append("file", image, image.name);
-    this.http.post(API + "images", formData).subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        console.error(err);
-      }
-    );
+    return this.http.post(API + "images", formData);
   }
 
   getImages(): any {

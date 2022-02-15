@@ -15,9 +15,18 @@ auth = Blueprint('/auth', __name__, url_prefix='/auth')
 auth_wrap = Api(auth)
 
 
+def generate_token_res(user_id: str) -> dict[str, str]:
+    exp = datetime.datetime.utcnow() + datetime.timedelta(minutes=240)
+    token = jwt.encode({
+        'public_id': user_id,
+        'exp': exp
+    }, Config.SECRET_KEY, algorithm="HS512")
+    return jsonify({'token': token})
+
+
 @auth.route('/register', methods=['POST'])
 @cross_origin()
-def signup_user():
+def register_user():
     data = request.get_json()
     username_taken = User.query.filter_by(username=data['username']).first()
     if username_taken:
@@ -30,7 +39,8 @@ def signup_user():
     )
     db.session.add(new_user)
     db.session.commit()
-    return jsonify({'message': 'registered successfully'})
+    user = User.query.filter_by(username=data['username']).first()
+    return generate_token_res(user.public_id)
 
 
 @auth.route('/login', methods=['POST'])
@@ -42,12 +52,7 @@ def login_user():
     if data and username and password:
         user = User.query.filter_by(username=username).first()
         if user and bcrypt.check_password_hash(user.password, password):
-            exp = datetime.datetime.utcnow() + datetime.timedelta(minutes=240)
-            token = jwt.encode({
-                'public_id': user.public_id,
-                'exp': exp
-            }, Config.SECRET_KEY, algorithm="HS512")
-            return jsonify({'token': token})
+            return generate_token_res(user.public_id)
     return make_response(
         'could not verify',
         401,
