@@ -9,6 +9,7 @@ import { ImagesService } from "../services/images.service";
 export class UploadImageComponent implements OnInit {
   file2upload!: File;
   filename!: string;
+  displayUploadBtn: boolean = false;
   displayLoading: boolean = false;
   @Output() uploadEvent = new EventEmitter();
 
@@ -19,6 +20,7 @@ export class UploadImageComponent implements OnInit {
   onChange(event) {
     this.file2upload = event.target.files[0];
     this.filename = this.file2upload.name;
+    this.displayUploadBtn = true;
   }
 
   onUpload() {
@@ -31,5 +33,6 @@ export class UploadImageComponent implements OnInit {
       this.filename = "Image mise en ligne avec succès !";
       this.uploadEvent.emit();
     }, 5000);
+    this.displayUploadBtn = false;
   }
 }

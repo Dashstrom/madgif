@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { API } from "../constants";
 
@@ -9,7 +10,10 @@ declare const Buffer;
   providedIn: "root",
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   isAuth(): boolean {
     const claims = this.getClaims();
@@ -38,7 +42,15 @@ export class AuthService {
     const token = this.getToken();
     if (token) {
       const b64Payload = token.split(".", 3)[1];
+      if (b64Payload == undefined) {
+        console.error("Error while extracting the Token payload");
+        return null;
+      }
       const JSONpayload = Buffer.from(b64Payload, "base64").toString("binary");
+      if (JSONpayload == undefined) {
+        console.error("Error while decoding the B64Token");
+        return null;
+      }
       const payload = JSON.parse(JSONpayload);
       return payload;
     }
@@ -73,5 +85,6 @@ export class AuthService {
 
   logout(): void {
     this.delToken();
+    this.router.navigate([""]);
   }
 }

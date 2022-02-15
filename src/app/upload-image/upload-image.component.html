@@ -12,10 +12,10 @@
     id="imgSelector"
     hidden
   />
-  <button class="upload-btn" (click)="onUpload()">
+  <button *ngIf="displayUploadBtn" class="upload-btn" (click)="onUpload()">
     <img
       class="icon"
-      src="../../assets/img/upload.png"
+      src="/assets/img/upload.png"
       alt="mettre en ligne"
       ngbTooltip="Mettre en ligne"
       placement="bottom"
@@ -24,7 +24,7 @@
   <img
     *ngIf="displayLoading"
     class="static-icon loading ml-4"
-    src="../../assets/img/loading.png"
+    src="/assets/img/loading.png"
     alt="chargement en cours..."
   />
 </div>

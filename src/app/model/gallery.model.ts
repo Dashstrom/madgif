@@ -4,7 +4,7 @@ export class Photo {
   id!: string;
   imgURL!: SafeUrl;
   uploadDate!: Date;
-  display!: boolean;
+  name!: string;
 }
 
 export class EditQuery {

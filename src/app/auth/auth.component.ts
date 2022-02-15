@@ -5,7 +5,7 @@ import {
   confirmPasswordOnRegister,
   checkPasswordComplexity,
 } from "../customvalidator/customvalidator.validator";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-auth",
@@ -24,13 +24,26 @@ export class AuthComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.register = false;
-    this.titleForm = "Se connecter";
-    this.txtChangeFormBtn = "Pas encore de compte ?";
+    this.route.queryParams.subscribe(
+      params => {
+        if (params["action"] === "register") {
+          this.register = true;
+          this.titleForm = "S'inscrire";
+          this.txtChangeFormBtn = "Déjà inscrit ?";
+        }
+        else {
+          this.register = false;
+          this.titleForm = "Se connecter";
+          this.txtChangeFormBtn = "Pas encore de compte ?";
+        }
+      },
+      err => console.error(err)
+    );
     this.formGroup = this.formBuilder.group(
       {
         username: ["", [Validators.required]],
@@ -50,7 +63,8 @@ export class AuthComponent implements OnInit {
         ],
       }
     );
-    this.formGroup.get("isRegistering").disable();
+    if (this.register) this.formGroup.get("isRegistering").enable();
+    else this.formGroup.get("isRegistering").disable();
   }
 
   switchForm() {
@@ -75,6 +89,7 @@ export class AuthComponent implements OnInit {
     this.submitted = true;
 
     if (this.formGroup.invalid) {
+      console.log("INVALIDE");
       return;
     }
 

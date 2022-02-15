@@ -13,25 +13,25 @@ export class HomeCarouselComponent implements OnInit {
       id: "0",
       imgURL: "../../assets/img/home/budapest.jpg",
       uploadDate: new Date(),
-      display: true,
+      name: "1"
     },
     {
       id: "1",
       imgURL: "../../assets/img/home/goat.jpg",
       uploadDate: new Date(),
-      display: true,
+      name: "2"
     },
     {
       id: "2",
       imgURL: "../../assets/img/home/moto-bikes.jpg",
       uploadDate: new Date(),
-      display: true,
+      name: "3"
     },
     {
       id: "3",
       imgURL: "../../assets/img/home/school.jpg",
       uploadDate: new Date(),
-      display: true,
+      name: "4"
     },
   ];
 
