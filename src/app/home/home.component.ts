@@ -12,19 +12,19 @@ export class HomeComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.isCollapsed = [true, true];
+    this.isCollapsed = [false, false];
     this.arrowImg = [
-      "../../assets/img/down-arrow.png",
-      "../../assets/img/down-arrow.png",
+      "/assets/img/down-arrow.png",
+      "/assets/img/down-arrow.png",
     ];
   }
 
   collapseBlock(numBlock): void {
     if (this.isCollapsed[numBlock]) {
-      this.arrowImg[numBlock] = "../../assets/img/up-arrow.png";
+      this.arrowImg[numBlock] = "/assets/img/up-arrow.png";
       this.isCollapsed[numBlock] = false;
     } else {
-      this.arrowImg[numBlock] = "../../assets/img/down-arrow.png";
+      this.arrowImg[numBlock] = "/assets/img/down-arrow.png";
       this.isCollapsed[numBlock] = true;
     }
   }
