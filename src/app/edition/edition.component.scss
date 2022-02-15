@@ -1,12 +1,5 @@
 @import "../../variables.scss";
 
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-    outline: none;
-}
-
 #wrapper {
   width: 100%;
 }
@@ -69,15 +62,13 @@ button:focus {
     filter: brightness(1.5);
   }
 
-  #upload {
-    background-image: url("/assets/img/upload.png");
+  #refresh {
+    background-image: url("/assets/img/refresh.png");
   }
 
   #download {
     background-image: url("/assets/img/download.png");
   }
-
-
 }
 
 #canvas {
@@ -126,7 +117,6 @@ button:focus {
   border-bottom: 3px solid gray;
 }
 
-
 %rotate {
   position: absolute;
   background-color: gray;
@@ -144,7 +134,6 @@ button:focus {
   background-color: rgb(81, 255, 0);
 }
 
-
 %rotate::after {
   content: "";
   z-index: 10;
@@ -160,7 +149,6 @@ button:focus {
   right: 0px;
 }
 
-
 #ne-rotate {
   @extend %rotate;
   top: -20px;
@@ -175,7 +163,6 @@ button:focus {
   transform: rotate(45deg);
 }
 
-
 #sw-rotate {
   @extend %rotate;
   bottom: -20px;
@@ -189,4 +176,3 @@ button:focus {
   -o-transform: rotate(225deg);
   transform: rotate(225deg);
 }
-

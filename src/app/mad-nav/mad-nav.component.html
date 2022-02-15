@@ -1,19 +1,39 @@
 <mat-sidenav-container>
-    <mat-sidenav  #sidenav="matSidenav" fixedInViewport="true" mode="side" [(opened)]="opened">
-        <mat-toolbar>Menu</mat-toolbar>
-        <mat-nav-list >
-            <a routerLinkActive="active" [routerLink]="['']" mat-list-item >Accueil <mat-icon matListIcon>home</mat-icon></a>
-            <a routerLinkActive="active" [routerLink]="['gallery']" mat-list-item >Galerie <mat-icon matListIcon>collections</mat-icon></a>
-            <a routerLinkActive="active" [routerLink]="['edition']"mat-list-item >Edition <mat-icon matListIcon>edit</mat-icon></a>
-        </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <mat-toolbar class="position-fixed" id="noh">
-            <button mat-button (click)="opened=!opened">
-                <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
-                <mat-icon *ngIf="sidenav.opened">close</mat-icon>
-            </button>
-        </mat-toolbar>
-        <ng-content></ng-content>
-    </mat-sidenav-content>
+  <mat-sidenav
+    #sidenav="matSidenav"
+    fixedInViewport="true"
+    mode="side"
+    [(opened)]="opened"
+  >
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a routerLinkActive="active" [routerLink]="['']" mat-list-item
+        >Accueil <mat-icon matListIcon>home</mat-icon></a
+      >
+      <a *ngIf="!auth.isAuth()" routerLinkActive="active" [routerLink]="['/auth']" mat-list-item
+        >Se connecter<mat-icon matListIcon>how_to_reg</mat-icon></a
+      >
+      <a *ngIf="!auth.isAuth()" routerLinkActive="active" [routerLink]="['/auth']" mat-list-item
+        >S'inscrire<mat-icon matListIcon>edit_note</mat-icon></a
+      >
+      <a *ngIf="auth.isAuth()" routerLinkActive="active" [routerLink]="['/gallery']" mat-list-item
+        >Galerie <mat-icon matListIcon>collections</mat-icon></a
+      >
+      <a *ngIf="auth.isAuth()" routerLinkActive="active" [routerLink]="['/edition']" mat-list-item
+        >Edition <mat-icon matListIcon>edit</mat-icon></a
+      >
+      <button *ngIf="auth.isAuth()" mat-list-item (click)="auth.logout()"
+        >Logout <mat-icon matListIcon>logout</mat-icon></button
+      >
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="position-fixed" id="noh">
+      <button mat-button (click)="opened = !opened">
+        <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+        <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+      </button>
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
 </mat-sidenav-container>

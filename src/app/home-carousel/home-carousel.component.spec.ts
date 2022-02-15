@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { HomeCarouselComponent } from './home-carousel.component';
+import { HomeCarouselComponent } from "./home-carousel.component";
 
-describe('HomeCarouselComponent', () => {
+describe("HomeCarouselComponent", () => {
   let component: HomeCarouselComponent;
   let fixture: ComponentFixture<HomeCarouselComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeCarouselComponent ]
-    })
-    .compileComponents();
+      declarations: [HomeCarouselComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('HomeCarouselComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

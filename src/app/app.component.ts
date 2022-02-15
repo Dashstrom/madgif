@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { MaterialModule } from './material/material.module';
+import { Component } from "@angular/core";
+
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-  title = 'madgif';
+  title = "madgif";
   opened = false;
 }

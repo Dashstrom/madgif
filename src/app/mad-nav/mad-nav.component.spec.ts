@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { MadNavComponent } from './mad-nav.component';
+import { MadNavComponent } from "./mad-nav.component";
 
-describe('MadNavComponent', () => {
+describe("MadNavComponent", () => {
   let component: MadNavComponent;
   let fixture: ComponentFixture<MadNavComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MadNavComponent ]
-    })
-    .compileComponents();
+      declarations: [MadNavComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('MadNavComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

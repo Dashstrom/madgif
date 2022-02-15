@@ -85,7 +85,7 @@ export class EditionComponent implements OnInit {
       );
   }
 
-  upload(): void {
+  refresh(): void {
     this.uploadObservable().subscribe();
   }
 

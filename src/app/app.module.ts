@@ -1,35 +1,34 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule, LOCALE_ID } from "@angular/core";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { GalleryComponent } from './gallery/gallery.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { HomeComponent } from "./home/home.component";
+import { GalleryComponent } from "./gallery/gallery.component";
 
-import { DatePipe, registerLocaleData } from '@angular/common';
-import localeFr from '@angular/common/locales/fr';
-import { MadFooterComponent } from './mad-footer/mad-footer.component';
-import { ImageCreditComponent } from './image-credit/image-credit.component';
-import { HomeCarouselComponent } from './home-carousel/home-carousel.component';
+import { DatePipe, registerLocaleData } from "@angular/common";
+import localeFr from "@angular/common/locales/fr";
+import { MadFooterComponent } from "./mad-footer/mad-footer.component";
+import { ImageCreditComponent } from "./image-credit/image-credit.component";
+import { HomeCarouselComponent } from "./home-carousel/home-carousel.component";
 registerLocaleData(localeFr);
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HomeLandingInfoComponent } from './home-landing-info/home-landing-info.component';
-import { AuthService } from './services/auth.service';
-import { ImagesService } from './services/images.service';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { ReactiveFormsModule } from '@angular/forms';
-import { EditionComponent } from './edition/edition.component';
-import { FormsModule } from '@angular/forms';
-import { AuthComponent } from './auth/auth.component';
-import { AuthGuard } from './guards/auth.guard';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material/material.module';
-import { MadNavComponent } from './mad-nav/mad-nav.component';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { HomeLandingInfoComponent } from "./home-landing-info/home-landing-info.component";
+import { AuthService } from "./services/auth.service";
+import { ImagesService } from "./services/images.service";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AuthInterceptor } from "./interceptors/auth.interceptor";
+import { ReactiveFormsModule } from "@angular/forms";
+import { EditionComponent } from "./edition/edition.component";
+import { FormsModule } from "@angular/forms";
+import { AuthComponent } from "./auth/auth.component";
+import { AuthGuard } from "./guards/auth.guard";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MaterialModule } from "./material/material.module";
+import { MadNavComponent } from "./mad-nav/mad-nav.component";
 
-
-import { UploadImageComponent } from './upload-image/upload-image.component';
+import { UploadImageComponent } from "./upload-image/upload-image.component";
 
 @NgModule({
   declarations: [
@@ -45,7 +44,7 @@ import { UploadImageComponent } from './upload-image/upload-image.component';
     EditionComponent,
     MadNavComponent,
     EditionComponent,
-    UploadImageComponent
+    UploadImageComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,21 +54,17 @@ import { UploadImageComponent } from './upload-image/upload-image.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MaterialModule
-  ],
-  exports:[
-    BrowserAnimationsModule,
     MaterialModule,
-    FormsModule
   ],
+  exports: [BrowserAnimationsModule, MaterialModule, FormsModule],
   providers: [
     { provide: LOCALE_ID, useValue: "fr-FR" },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     DatePipe,
     AuthService,
     ImagesService,
-    AuthGuard
+    AuthGuard,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

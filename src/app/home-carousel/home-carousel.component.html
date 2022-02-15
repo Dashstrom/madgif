@@ -1,13 +1,15 @@
-<div id="home-carousel" class="carousel slide" data-ride="carousel" data-interval="2000">
+<div
+  id="home-carousel"
+  class="carousel slide"
+  data-ride="carousel"
+  data-interval="2000"
+>
   <ngb-carousel>
-
     <ng-template ngbSlide *ngFor="let img of carouselImages">
-      <img [src]="img.imgURL" alt="carouselImages"/>
+      <img [src]="img.imgURL" alt="carouselImages" />
       <div class="carousel-caption">
         <app-home-landing-info></app-home-landing-info>
       </div>
     </ng-template>
-    
   </ngb-carousel>
-    
 </div>

@@ -1,11 +1,30 @@
-<div class="d-flex flex-row justify-content-center text-center align-items-center mb-4">
-  <label class="select-btn py-1 px-3 my-auto" for="imgSelector">CHOISIR UNE IMAGE</label>
+<div
+  class="d-flex flex-row justify-content-center text-center align-items-center mb-4"
+>
+  <label class="select-btn py-1 px-3 my-auto" for="imgSelector"
+    >CHOISIR UNE IMAGE</label
+  >
   <div class="py-1 px-3 filename">{{ filename }}</div>
-  <input type="file" (change)="onChange($event)" name="imgSelector" id="imgSelector" hidden>
+  <input
+    type="file"
+    (change)="onChange($event)"
+    name="imgSelector"
+    id="imgSelector"
+    hidden
+  />
   <button class="upload-btn" (click)="onUpload()">
-    <img class="icon" src="../../assets/img/upload.png"
-      alt="mettre en ligne" ngbTooltip="Mettre en ligne" placement="bottom">
+    <img
+      class="icon"
+      src="../../assets/img/upload.png"
+      alt="mettre en ligne"
+      ngbTooltip="Mettre en ligne"
+      placement="bottom"
+    />
   </button>
-  <img *ngIf="displayLoading" class="static-icon loading ml-4" src="../../assets/img/loading.png"
-      alt="chargement en cours...">
+  <img
+    *ngIf="displayLoading"
+    class="static-icon loading ml-4"
+    src="../../assets/img/loading.png"
+    alt="chargement en cours..."
+  />
 </div>

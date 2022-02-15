@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ImageCreditComponent } from './image-credit.component';
+import { ImageCreditComponent } from "./image-credit.component";
 
-describe('ImageCreditComponent', () => {
+describe("ImageCreditComponent", () => {
   let component: ImageCreditComponent;
   let fixture: ComponentFixture<ImageCreditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImageCreditComponent ]
-    })
-    .compileComponents();
+      declarations: [ImageCreditComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('ImageCreditComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,21 +1,17 @@
-import { ThrowStmt } from '@angular/compiler';
-import { Component, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { Photo } from '../model/gallery.model';
-import { ImagesService } from '../services/images.service';
+import { Component, OnInit } from "@angular/core";
+import { Photo } from "../model/gallery.model";
+import { ImagesService } from "../services/images.service";
 
 @Component({
-  selector: 'app-gallery',
-  templateUrl: './gallery.component.html',
-  styleUrls: ['./gallery.component.scss']
+  selector: "app-gallery",
+  templateUrl: "./gallery.component.html",
+  styleUrls: ["./gallery.component.scss"],
 })
 export class GalleryComponent implements OnInit {
   photos: Photo[] = [];
   amountPhotos: number = 0;
 
-  constructor(
-    private imagesService: ImagesService
-  ) {}
+  constructor(private imagesService: ImagesService) {}
 
   ngOnInit() {
     this.showNewPictures();
@@ -34,7 +30,6 @@ export class GalleryComponent implements OnInit {
         i++;
       }
     }
-    
   }
 
   showNewPictures() {
@@ -53,26 +48,28 @@ export class GalleryComponent implements OnInit {
 
   loadPictures() {
     this.imagesService.getImages().subscribe(
-      res => {
+      (res) => {
         for (let i = 0; i < res.length; i++) {
-          this.imagesService.urlRawImageById(res[i].public_id).subscribe(
-            url => {
+          this.imagesService
+            .urlRawImageById(res[i].public_id)
+            .subscribe((url) => {
               if (!this.isPictureAlreadyLoaded(res[i])) {
                 this.photos.unshift({
                   id: res[i].public_id,
                   imgURL: url,
                   uploadDate: res[i].date_creation,
-                  display: true
-                })
+                  display: true,
+                });
                 this.sortArrayByDate();
                 this.amountPhotos++;
               }
-            }
-          ) 
+            });
         }
       },
-      err => { console.error(err) }
-    )
+      (err) => {
+        console.error(err);
+      }
+    );
   }
 
   sortArrayByDate() {
@@ -80,6 +77,6 @@ export class GalleryComponent implements OnInit {
       if (b.uploadDate > a.uploadDate) return 1;
       if (b.uploadDate < a.uploadDate) return -1;
       return 0;
-    })
+    });
   }
 }

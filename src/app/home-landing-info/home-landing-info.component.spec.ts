@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { HomeLandingInfoComponent } from './home-landing-info.component';
+import { HomeLandingInfoComponent } from "./home-landing-info.component";
 
-describe('HomeLandingInfoComponent', () => {
+describe("HomeLandingInfoComponent", () => {
   let component: HomeLandingInfoComponent;
   let fixture: ComponentFixture<HomeLandingInfoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeLandingInfoComponent ]
-    })
-    .compileComponents();
+      declarations: [HomeLandingInfoComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('HomeLandingInfoComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

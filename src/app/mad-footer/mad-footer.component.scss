@@ -1,51 +1,51 @@
 footer {
-    .teaser-social-network {
-        color: white;
-    }
+  .teaser-social-network {
+    color: white;
+  }
 
-    .social-networks {
-        background-color: #263238;
-    }
-    
-    .copyrights {
-        background-color: #1E282D;
-        color: white;
-    }
+  .social-networks {
+    background-color: #263238;
+  }
 
-    .icon {
-        width: 30px;
-        transition: all 0.3s ease-in-out 0s;
-    }
+  .copyrights {
+    background-color: #1e282d;
+    color: white;
+  }
 
-    .icon:hover {
-        transform: rotate(360deg);
-        filter: brightness(80%);
-    }
+  .icon {
+    width: 30px;
+    transition: all 0.3s ease-in-out 0s;
+  }
 
-    strong {
-        font-weight: bold;
-    }
+  .icon:hover {
+    transform: rotate(360deg);
+    filter: brightness(80%);
+  }
 
-    a {
-        text-decoration: none;
-        color: white;
-    }
+  strong {
+    font-weight: bold;
+  }
 
-    a:hover {
-        color: rebeccapurple;
-    }
+  a {
+    text-decoration: none;
+    color: white;
+  }
 
-    li {
-        list-style-type: none;
-    }
+  a:hover {
+    color: rebeccapurple;
+  }
 
-    .lower-footer a {
-        text-decoration: underline;
-        font-size: 10px;
-        color: gray;
-    }
+  li {
+    list-style-type: none;
+  }
 
-    .lower-footer a:hover {
-        color: rebeccapurple;
-    }
+  .lower-footer a {
+    text-decoration: underline;
+    font-size: 10px;
+    color: gray;
+  }
+
+  .lower-footer a:hover {
+    color: rebeccapurple;
+  }
 }

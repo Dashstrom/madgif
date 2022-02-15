@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { GalleryComponent } from './gallery/gallery.component';
-import { ImageCreditComponent } from './image-credit/image-credit.component';
-import { EditionComponent } from './edition/edition.component';
-import { AuthComponent } from './auth/auth.component';
-import { AuthGuard } from './guards/auth.guard';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { HomeComponent } from "./home/home.component";
+import { GalleryComponent } from "./gallery/gallery.component";
+import { ImageCreditComponent } from "./image-credit/image-credit.component";
+import { EditionComponent } from "./edition/edition.component";
+import { AuthComponent } from "./auth/auth.component";
+import { AuthGuard } from "./guards/auth.guard";
 
 const routes: Routes = [
   {
@@ -25,7 +25,7 @@ const routes: Routes = [
     component: ImageCreditComponent,
   },
   {
-    path: 'auth',
+    path: "auth",
     pathMatch: "full",
     component: AuthComponent,
   },
@@ -40,11 +40,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     pathMatch: "full",
     component: EditionComponent,
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

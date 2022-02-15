@@ -1,20 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material';
-import { MaterialModule } from '../material/material.module';
-
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { MatSidenav } from "@angular/material";
+import { AuthService } from "../services/auth.service";
 
 @Component({
-  selector: 'app-mad-nav',
-  templateUrl: './mad-nav.component.html',
-  styleUrls: ['./mad-nav.component.scss']
+  selector: "app-mad-nav",
+  templateUrl: "./mad-nav.component.html",
+  styleUrls: ["./mad-nav.component.scss"],
 })
 export class MadNavComponent implements OnInit {
   @ViewChild(MatSidenav)
-  sidenav!:MatSidenav;
-  
-  constructor() { }
+  sidenav!: MatSidenav;
+  opened: boolean;
 
-  ngOnInit() {
-  }
+  constructor(public auth: AuthService) {}
 
+  ngOnInit() {}
 }

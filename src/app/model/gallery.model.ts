@@ -1,10 +1,10 @@
 import { SafeUrl } from "@angular/platform-browser";
 
 export class Photo {
-    id!: string;
-    imgURL!: SafeUrl;
-    uploadDate!: Date;
-    display!: boolean;
+  id!: string;
+  imgURL!: SafeUrl;
+  uploadDate!: Date;
+  display!: boolean;
 }
 
 export class EditQuery {

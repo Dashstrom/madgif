@@ -1,70 +1,69 @@
-
 .auth-wrapper {
-    height: 100vh;
-    background-image: url('https://cdn.pixabay.com/photo/2017/08/06/12/06/people-2591874_1280.jpg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+  height: 100vh;
+  background-image: url("https://cdn.pixabay.com/photo/2017/08/06/12/06/people-2591874_1280.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 .auth-block h2 {
-    color: white;
-    border-color: white;
+  color: white;
+  border-color: white;
 }
 
 .auth-block {
-    background-color: #2632389c;
-    width: 60vw;
-    border-radius: 5px;
+  background-color: #2632389c;
+  width: 60vw;
+  border-radius: 5px;
 
-    input {
-        color: white;
-        outline: none;
-        font-weight: bold;
-        border: none;
-        background-color: transparent;
-        width: 100%;
-    }
+  input {
+    color: white;
+    outline: none;
+    font-weight: bold;
+    border: none;
+    background-color: transparent;
+    width: 100%;
+  }
 
-    button {
-        float: right;
-        background-color: transparent;
-        border: none;
-    }
+  button {
+    float: right;
+    background-color: transparent;
+    border: none;
+  }
 
-    button:hover {
-        cursor: pointer;
-        filter: brightness(10%);
-    }
+  button:hover {
+    cursor: pointer;
+    filter: brightness(10%);
+  }
 
-    a {
-        color: white;
-        font-style: italic;
-    }
+  a {
+    color: white;
+    font-style: italic;
+  }
 
-    a:hover {
-        color: pink;
-        cursor: pointer;
-    }
+  a:hover {
+    color: pink;
+    cursor: pointer;
+  }
 }
 
 ::placeholder {
-    color: white;
+  color: white;
 }
 
 .auth-line {
-    border-bottom: solid white 1px;
+  border-bottom: solid white 1px;
 }
 
 .icon {
-    width: 40px;
-    float: left;
+  width: 40px;
+  float: left;
 }
 
 .border-h {
-    border: solid red 10px;
+  border: solid red 10px;
 }
 
 .switch-form {
-    float: right;
+  float: right;
 }

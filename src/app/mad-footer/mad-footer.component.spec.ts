@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { MadFooterComponent } from './mad-footer.component';
+import { MadFooterComponent } from "./mad-footer.component";
 
-describe('MadFooterComponent', () => {
+describe("MadFooterComponent", () => {
   let component: MadFooterComponent;
   let fixture: ComponentFixture<MadFooterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MadFooterComponent ]
-    })
-    .compileComponents();
+      declarations: [MadFooterComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('MadFooterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

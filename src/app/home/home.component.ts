@@ -1,32 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: "app-home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
-  isCollapsed !: boolean[];
-  arrowImg !: string[];
+  isCollapsed!: boolean[];
+  arrowImg!: string[];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.isCollapsed = [true, true];
     this.arrowImg = [
-      '../../assets/img/down-arrow.png',
-      '../../assets/img/down-arrow.png'
-    ]
+      "../../assets/img/down-arrow.png",
+      "../../assets/img/down-arrow.png",
+    ];
   }
 
   collapseBlock(numBlock): void {
     if (this.isCollapsed[numBlock]) {
-      this.arrowImg[numBlock] = '../../assets/img/up-arrow.png';
+      this.arrowImg[numBlock] = "../../assets/img/up-arrow.png";
       this.isCollapsed[numBlock] = false;
     } else {
-      this.arrowImg[numBlock] = '../../assets/img/down-arrow.png';
+      this.arrowImg[numBlock] = "../../assets/img/down-arrow.png";
       this.isCollapsed[numBlock] = true;
     }
   }
-
 }

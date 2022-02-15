@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { UploadImageComponent } from './upload-image.component';
+import { UploadImageComponent } from "./upload-image.component";
 
-describe('UploadImageComponent', () => {
+describe("UploadImageComponent", () => {
   let component: UploadImageComponent;
   let fixture: ComponentFixture<UploadImageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UploadImageComponent ]
-    })
-    .compileComponents();
+      declarations: [UploadImageComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('UploadImageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

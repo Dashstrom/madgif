@@ -1,15 +1,30 @@
-mat-sidenav{
-width: 15%;
+mat-sidenav {
+  width: 15%;
 }
-mat-nav-list{
-    justify-content: space-between;
-    color:white;
-}
-mat-list-item{
+
+mat-nav-list {
+  justify-content: space-between;
+
+  mat-list-item {
     font: rgba(255, 255, 255, 0.747);
+    color: black;
+  }
+
+  button {
+    border: 0px;
+    background-color: white;
+  }
 }
-#noh{
-    height: 0px;
-    display: inline-block;
-    z-index: 300;
+
+#noh {
+  height: 0px;
+  display: inline-block;
+  z-index: 300;
+
+  button {
+    margin-top: 10px;
+    background-color: white;
+    border: 2px solid black;
+  }
 }
+
